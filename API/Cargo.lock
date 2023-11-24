@@ -3,13 +3,6 @@
 version = 3
 
 [[package]]
-name = "API"
-version = "0.1.0"
-dependencies = [
- "rocket",
-]
-
-[[package]]
 name = "addr2line"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -31,6 +24,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b2969dcb958b36655471fc61f7e416fa76033bdd4bfed0678d8fee1e2d07a1f0"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "api"
+version = "0.1.0"
+dependencies = [
+ "data",
+ "infrastructure",
+ "repository",
+ "rocket",
 ]
 
 [[package]]
@@ -157,6 +160,10 @@ dependencies = [
  "time",
  "version_check",
 ]
+
+[[package]]
+name = "data"
+version = "0.1.0"
 
 [[package]]
 name = "deranged"
@@ -457,6 +464,10 @@ dependencies = [
  "hashbrown",
  "serde",
 ]
+
+[[package]]
+name = "infrastructure"
+version = "0.1.0"
 
 [[package]]
 name = "inlinable_string"
@@ -841,6 +852,13 @@ name = "regex-syntax"
 version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
+
+[[package]]
+name = "repository"
+version = "0.1.0"
+dependencies = [
+ "data",
+]
 
 [[package]]
 name = "rocket"

@@ -1,31 +1,33 @@
+use data::{distress_call::DistressCall, cordiantes::Cordinates};
 
-enum DistressCallFind{
-    Ok(x),
+
+pub enum DistressCallFind{
+    Ok(DistressCall),
     DoesNotExists,
 
 }
 
 
-enum DistressCallCreation{
-    Ok(x),
+pub enum DistressCallCreation{
+    Ok(String),
     FailedToCreate,
 
 }
 
-trait IDistressCallRepository{
+pub trait IDistressCallRepository{
 
 
-    pub fn Create(location : Cordinates, Details:String) -> DistressCallCreation; // returns SecretKey
+    fn create(location : Cordinates, details:String) -> DistressCallCreation; // returns SecretKey
 
-    pub fn GetById(id:int) -> DistressCallFind;
+    fn get_by_id(id:i32) -> DistressCallFind;
 
-    pub fn GetBySecretKey(SecretKey:String) -> DistressCallFind;
+    fn get_by_secret_key(secret_key:String) -> DistressCallFind;
 
-    pub fn GetAll() -> Vec<DistressCall>;
+    fn get_all() -> Vec<DistressCall>;
 
-    pub fn Delete(SecretKey:String);
+    fn delete(secret_key:String);
 
-    pub fn Update(SecretKey:String, location: Cordinates, Details:String) -> DistressCallCreation; // will return the Same SecretKey
+    fn update(secret_key:String, location: Cordinates, details:String) -> DistressCallCreation; // will return the Same SecretKey
 
     
 

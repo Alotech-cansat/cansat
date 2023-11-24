@@ -1,18 +1,18 @@
 [package]
-name = "API"
+name = "api"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies.Repository]
-path = "Repositiory"
+[dependencies.repository]
+path = "repository"
 
-[dependencies.Infrastructure]
-path = "Infrastructure"
+[dependencies.infrastructure]
+path = "infrastructure"
 
-[dependencies.Data]
-path = "Data"
+[dependencies.data]
+path = "data"
 
 [dependencies]
 rocket = "0.5.0"

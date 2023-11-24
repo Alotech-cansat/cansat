@@ -1,2 +1,2 @@
-pub mod IDistressCallRepository;
+pub mod idistresscallrepo;
 
