@@ -17,9 +17,9 @@ pub enum DistressCallCreation{
 pub trait IDistressCallRepository{
 
 
-    fn create(&mut self, location : Cordinates, details:String) -> DistressCallCreation; // returns SecretKey
+    fn create(location : Cordinates, details:String) -> DistressCallCreation; // returns SecretKey
 
-    fn get_by_id(&mut self, id:i32) -> DistressCallFind;
+    fn get_by_id(id:i32) -> DistressCallFind;
 
     fn get_by_secret_key(secret_key:String) -> DistressCallFind;
 

@@ -1,10 +1,11 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    distress_calls (id) {
-        id -> Nullable<Integer>,
+    distress_calls {
+        id -> Integer,
         secret_key -> Text,
         call_cordinates -> Text,
-        details -> Nullable<Text>,
+        details -> Text,
+
     }
 }

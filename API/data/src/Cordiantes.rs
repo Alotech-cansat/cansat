@@ -17,14 +17,19 @@ impl Cordinates{
     }
 
     pub fn new_from_string(cordinates:String) -> Cordinates{
-        todo!();
+
+        //TODO:
+        Cordinates{
+            longitude:10.0,
+            latitude: 10.0
+        }
     }
 
     pub fn get_decimals(self) -> (f64, f64){
         (self.latitude, self.longitude)
     }
 
-    pub fn get_string (self) -> String{
+    pub fn get_string(self) -> String{
 
         return format!("{} {}", self.latitude, self.longitude);
 

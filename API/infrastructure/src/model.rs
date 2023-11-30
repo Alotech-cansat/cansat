@@ -1,6 +1,6 @@
 use diesel::prelude::*;
 use data::{distress_call::DistressCall, cordiantes::Cordinates};
-use crate::schema::distress_calls::{self, secret_key, call_cordinates, details};
+use crate::schema::distress_calls::{self, };
 
 #[derive(Queryable, PartialEq, Debug)]
 #[diesel(table_name = distress_calls)]
