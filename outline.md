@@ -1,6 +1,6 @@
 # Software outline document
 
-ALOTECH Cansat purpouse is to enable cheap and quick transport of survival equipment into ares affect by disasters.
+ALOTECH Cansat purpouse is to enable cheap and quick transport of survival equipment into areas affected by disasters.
 
 ## ALOTECH CANSAT Goals
 
