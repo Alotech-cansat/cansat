@@ -1,0 +1,12 @@
+C:\Users\Staś\Desktop\CANSAT\api\target\debug\deps\state-2de08aa562625574.rmeta: C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\lib.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\ident_hash.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\cell.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\init.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\shim.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\type_map.rs
+
+C:\Users\Staś\Desktop\CANSAT\api\target\debug\deps\libstate-2de08aa562625574.rlib: C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\lib.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\ident_hash.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\cell.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\init.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\shim.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\type_map.rs
+
+C:\Users\Staś\Desktop\CANSAT\api\target\debug\deps\state-2de08aa562625574.d: C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\lib.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\ident_hash.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\cell.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\init.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\shim.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\type_map.rs
+
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\lib.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\ident_hash.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\cell.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\init.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\shim.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\state-0.6.0\src\type_map.rs:

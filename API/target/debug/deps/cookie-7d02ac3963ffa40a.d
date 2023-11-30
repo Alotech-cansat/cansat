@@ -1,0 +1,12 @@
+C:\Users\Staś\Desktop\CANSAT\api\target\debug\deps\cookie-7d02ac3963ffa40a.rmeta: C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\lib.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\builder.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\parse.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\jar.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\delta.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\same_site.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\expiration.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\prefix.rs
+
+C:\Users\Staś\Desktop\CANSAT\api\target\debug\deps\cookie-7d02ac3963ffa40a.d: C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\lib.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\builder.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\parse.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\jar.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\delta.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\same_site.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\expiration.rs C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\prefix.rs
+
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\lib.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\builder.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\parse.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\jar.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\delta.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\same_site.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\expiration.rs:
+C:\Users\Staś\.cargo\registry\src\index.crates.io-6f17d22bba15001f\cookie-0.18.0\src\prefix.rs:

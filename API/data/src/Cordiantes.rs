@@ -10,10 +10,13 @@ pub struct Cordinates{
 impl Cordinates{
 
     pub fn new_from_decimal(latitude: f64, longitude:f64) -> Cordinates{
-        todo!();
+        Cordinates{
+            latitude,
+            longitude
+        }
     }
 
-    pub fn new_from_string(latitude: String, longitude:String) -> Cordinates{
+    pub fn new_from_string(cordinates:String) -> Cordinates{
         todo!();
     }
 
@@ -21,8 +24,11 @@ impl Cordinates{
         (self.latitude, self.longitude)
     }
 
-    pub fn get_string() -> (String, String){
-        todo!();
+    pub fn get_string (self) -> String{
+
+        return format!("{} {}", self.latitude, self.longitude);
+
+       
     }
 
 
