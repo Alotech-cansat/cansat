@@ -1,5 +1,5 @@
 
-
+#[derive(PartialEq, Debug)]
 pub struct Cordinates{
     pub latitude: f64,
     pub longitude: f64,

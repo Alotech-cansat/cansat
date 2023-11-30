@@ -26,3 +26,12 @@ fn find_id(){
 
     let res = Database::get_by_id(1);
 }
+#[test]
+fn find_by_id_non_existing_item(){
+    use crate::database::Database;
+    use repository::idistresscallrepo::*;
+
+    let res = Database::get_by_id(-200);
+
+    assert_eq!(res, DistressCallFind::DoesNotExists);
+}

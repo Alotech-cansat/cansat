@@ -1,6 +1,6 @@
 use data::{distress_call::DistressCall, cordiantes::Cordinates};
 
-
+#[derive(PartialEq, Debug)]
 pub enum DistressCallFind{
     Ok(DistressCall),
     DoesNotExists,

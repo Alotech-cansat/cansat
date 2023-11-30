@@ -59,7 +59,7 @@ impl IDistressCallRepository for Database{
         let connection = &mut Database::get_connection();
 
         let result = distress_calls
-            .find(id)
+            .find(distress_call_id)
             .first::<DataBaseDistressSignal>(connection);
 
         match result{
