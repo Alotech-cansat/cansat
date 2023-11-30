@@ -24,8 +24,15 @@ fn find_id(){
     use crate::database::Database;
     use repository::idistresscallrepo::*;
 
-    let res = Database::get_by_id(1);
+    let res: i32 =  match Database::get_by_id(1) {
+        DistressCallFind::Ok(x) => x.id,
+        DistressCallFind::DoesNotExists => -1   
+        
+    };
+
+    assert_eq!(res, 1);
 }
+
 #[test]
 fn find_by_id_non_existing_item(){
     use crate::database::Database;
@@ -34,4 +41,20 @@ fn find_by_id_non_existing_item(){
     let res = Database::get_by_id(-200);
 
     assert_eq!(res, DistressCallFind::DoesNotExists);
+}
+
+#[test]
+fn find_by_secret_key(){
+    use crate::database::Database;
+    use repository::idistresscallrepo::*;
+
+    let res: String =  match Database::get_by_secret_key(String::from("secret_key")) {
+        DistressCallFind::Ok(x) => x.secret_key,
+        DistressCallFind::DoesNotExists => String::from("-1")   
+        
+    };
+
+    let expected_res = String::from("secret_key");
+
+    assert_eq!(res, expected_res);
 }

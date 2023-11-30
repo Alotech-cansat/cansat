@@ -69,8 +69,17 @@ impl IDistressCallRepository for Database{
         
     }
 
-    fn get_by_secret_key(distress_call_secret_key:String) -> DistressCallFind{
-        todo!()
+    fn get_by_secret_key(distress_call_secret_key: String) -> DistressCallFind {
+        let connection = &mut Database::get_connection();
+    
+        let result = distress_calls
+            .filter(secret_key.eq(&distress_call_secret_key))
+            .first::<DataBaseDistressSignal>(connection);
+    
+        match result {
+            Ok(record) => DistressCallFind::Ok(record.get()),
+            Err(_) => DistressCallFind::DoesNotExists,
+        }
     }
 
     fn get_all() -> Vec<DistressCall>{
