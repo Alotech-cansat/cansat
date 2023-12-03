@@ -2,6 +2,9 @@
 use diesel::sqlite::{SqliteConnection, Sqlite};
 use diesel::prelude::*;
 
+use rand::RngCore;
+use base64;
+
 use crate::model::*;
 use crate::schema::distress_calls;
 use crate::schema::distress_calls::dsl::*;
@@ -25,8 +28,13 @@ impl Database{
     }
 
     pub fn generate_secret_key() -> String{
-        //TODO:
-        return String::from("secret_key");
+        let mut rng = rand::thread_rng();
+        let mut generated_secret_key = vec![0; 32];
+        rng.fill_bytes(&mut generated_secret_key);
+
+        
+        let generated_secret_key_as_string = String::from_utf8_lossy(&generated_secret_key).to_string();
+        base64::encode(&generated_secret_key)
     }
 }
 
@@ -40,6 +48,8 @@ impl IDistressCallRepository for Database{
         let distress_call_secret_key = Database::generate_secret_key();
         let distress_call_cordinates = distress_call_cordinates.get_string();
 
+        
+
         let new_call = NewDistressCall {  
             secret_key:distress_call_secret_key, 
             call_cordinates:distress_call_cordinates, 
@@ -50,7 +60,7 @@ impl IDistressCallRepository for Database{
             .execute(&mut Database::get_connection())
             .expect("Error");
 
-        return DistressCallCreation::Ok(String::from("xyz"));
+        return DistressCallCreation::Ok(new_call.secret_key);
     }
 
     fn get_by_id(distress_call_id:i32) -> DistressCallFind{
