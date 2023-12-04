@@ -16,13 +16,22 @@ impl Cordinates{
         }
     }
 
-    pub fn new_from_string(cordinates:String) -> Cordinates{
+    pub fn new_from_string(cordinates:String) -> Result<Cordinates, String>{
+        let parts:Vec<&str> = cordinates.split(" ").collect();
 
-        //TODO:
-        Cordinates{
-            longitude:10.0,
-            latitude: 10.0
+        if parts.len() == 2{
+            if let (Ok(latitude), Ok(longitude)) = (parts[0].parse(), parts[1].parse()){
+                Ok(Cordinates{
+                    latitude: latitude,
+                    longitude: longitude,
+                })      
+            }else{
+                Err(String::from("failed to convert"))
+            }
+        }else{
+            Err(String::from("failed to convert"))
         }
+
     }
 
     pub fn get_decimals(self) -> (f64, f64){

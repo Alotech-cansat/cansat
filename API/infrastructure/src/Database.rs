@@ -1,5 +1,5 @@
 
-use diesel::sqlite::{SqliteConnection, Sqlite};
+use diesel::sqlite::SqliteConnection;
 use diesel::prelude::*;
 
 use uuid::Uuid;
@@ -129,7 +129,7 @@ impl IDistressCallRepository for Database{
             .execute(connection);
 
         match res{
-            Ok(x) => DistressCallCreation::Ok(distress_call_secret_key),
+            Ok(_) => DistressCallCreation::Ok(distress_call_secret_key),
             _ => DistressCallCreation::FailedToCreate
         }
         

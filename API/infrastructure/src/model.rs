@@ -18,7 +18,7 @@ impl DataBaseDistressSignal{
 
         let cordinates_string = self.call_cordinates;
 
-        let cordiantes = Cordinates::new_from_string(cordinates_string);
+        let cordiantes = Cordinates::new_from_string(cordinates_string).expect("failed to convert form string");
 
         DistressCall{
             id:self.id,
