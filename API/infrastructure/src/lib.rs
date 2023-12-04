@@ -8,6 +8,14 @@ mod schema;
 //cargo test -- --test-threads=1
 
 #[test]
+fn get_highest_id(){
+    use crate::database::Database;
+
+    Database::get_highest_id();
+
+}
+
+#[test]
 fn add_to_database_test(){
     use crate::database::Database;
     use data::cordiantes::*;
@@ -26,13 +34,13 @@ fn find_id(){
     use crate::database::Database;
     use repository::idistresscallrepo::*;
 
-    let res: i32 =  match Database::get_by_id(1) {
+    let res: i32 =  match Database::get_by_id(Database::get_highest_id()) {
         DistressCallFind::Ok(x) => x.id,
         DistressCallFind::DoesNotExists => -1   
         
     };
 
-    assert_eq!(res, 1);
+    assert_eq!(res, Database::get_highest_id());
 }
 
 #[test]
@@ -50,15 +58,21 @@ fn find_by_secret_key(){
     use crate::database::Database;
     use repository::idistresscallrepo::*;
 
-    let res: String =  match Database::get_by_secret_key(String::from("secret_key")) {
-        DistressCallFind::Ok(x) => x.secret_key,
-        DistressCallFind::DoesNotExists => String::from("-1")   
+    match Database::get_by_id(Database::get_highest_id()) {
+        DistressCallFind::Ok(x) => {
+            let secret_key = x.secret_key.clone();
+            match Database::get_by_secret_key(x.secret_key) {
+                DistressCallFind::Ok(y) => assert_eq!(secret_key, y.secret_key),
+                DistressCallFind::DoesNotExists => panic!("error")  
+                
+            };
+        },
+        DistressCallFind::DoesNotExists => panic!("error") 
         
     };
 
-    let expected_res = String::from("secret_key");
 
-    assert_eq!(res, expected_res);
+
 }
 
 #[test]
@@ -67,4 +81,16 @@ fn get_all(){
     use repository::idistresscallrepo::*;
 
     Database::get_all();
+}
+
+#[test]
+fn delete(){
+    use crate::database::Database;
+    use repository::idistresscallrepo::*;
+
+    match Database::get_by_id(Database::get_highest_id()) {
+        DistressCallFind::Ok(x) => Database::delete(x.secret_key),
+        DistressCallFind::DoesNotExists => panic!("error") 
+        
+    };
 }

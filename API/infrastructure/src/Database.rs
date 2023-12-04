@@ -3,7 +3,6 @@ use diesel::sqlite::{SqliteConnection, Sqlite};
 use diesel::prelude::*;
 
 use uuid::Uuid;
-use base64;
 
 use crate::model::*;
 use crate::schema::distress_calls;
@@ -29,6 +28,17 @@ impl Database{
 
     pub fn generate_secret_key() -> String{
         Uuid::new_v4().to_string()
+    }
+
+    pub fn get_highest_id() -> i32{
+        let connection = &mut Database::get_connection();
+
+        distress_calls
+            .order(id.desc())
+            .first::<DataBaseDistressSignal>(connection)
+            .expect("error cannot retive highest id").id
+
+
     }
 }
 
@@ -82,7 +92,7 @@ impl IDistressCallRepository for Database{
     
         match result {
             Ok(record) => DistressCallFind::Ok(record.get()),
-            Err(x) => {DistressCallFind::DoesNotExists},
+            Err(x) => {println!("halo {:?}", x); DistressCallFind::DoesNotExists},
         }
     }
 
@@ -102,7 +112,9 @@ impl IDistressCallRepository for Database{
     }
 
     fn delete(distress_call_secret_key:String){
-        todo!()
+        let connection = &mut Database::get_connection();
+        let _ = diesel::delete(distress_calls.filter(secret_key.eq(distress_call_secret_key)))
+            .execute(connection);
     }
 
     fn update(distress_call_secret_key:String, distress_call_cordinates: Cordinates, distress_call_details:String) -> DistressCallCreation{

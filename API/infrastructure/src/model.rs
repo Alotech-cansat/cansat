@@ -5,10 +5,10 @@ use crate::schema::distress_calls::{self, };
 #[derive(Queryable, PartialEq, Debug)]
 #[diesel(table_name = distress_calls)]
 pub struct DataBaseDistressSignal{
-    id : i32, 
-    secret_key: String, 
-    call_cordinates: String, 
-    details:String 
+    pub id : i32, 
+    pub secret_key: String, 
+    pub call_cordinates: String, 
+    pub details:String 
 
 }
 
