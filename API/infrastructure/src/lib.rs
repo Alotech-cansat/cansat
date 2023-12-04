@@ -3,7 +3,9 @@ mod model;
 mod schema;
 
 
-
+//NOTE: Tests are run by default in diffrent threads, since sqlite can support only one db manipulation at the time 
+// we have to avoid testing 2 things at once use 
+//cargo test -- --test-threads=1
 
 #[test]
 fn add_to_database_test(){

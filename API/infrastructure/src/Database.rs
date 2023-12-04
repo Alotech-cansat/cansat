@@ -2,7 +2,7 @@
 use diesel::sqlite::{SqliteConnection, Sqlite};
 use diesel::prelude::*;
 
-use rand::RngCore;
+use uuid::Uuid;
 use base64;
 
 use crate::model::*;
@@ -28,13 +28,7 @@ impl Database{
     }
 
     pub fn generate_secret_key() -> String{
-        let mut rng = rand::thread_rng();
-        let mut generated_secret_key = vec![0; 32];
-        rng.fill_bytes(&mut generated_secret_key);
-
-        
-        let generated_secret_key_as_string = String::from_utf8_lossy(&generated_secret_key).to_string();
-        base64::encode(&generated_secret_key)
+        Uuid::new_v4().to_string()
     }
 }
 
@@ -88,7 +82,7 @@ impl IDistressCallRepository for Database{
     
         match result {
             Ok(record) => DistressCallFind::Ok(record.get()),
-            Err(_) => DistressCallFind::DoesNotExists,
+            Err(x) => {DistressCallFind::DoesNotExists},
         }
     }
 
