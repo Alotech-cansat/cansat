@@ -1,5 +1,7 @@
+use serde::{Serialize, Deserialize};
 
-#[derive(PartialEq, Debug)]
+
+#[derive(PartialEq, Debug, Serialize, Deserialize)]
 pub struct Cordinates{
     pub latitude: f64,
     pub longitude: f64,

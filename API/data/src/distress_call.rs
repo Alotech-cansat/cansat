@@ -1,7 +1,8 @@
 use crate::cordiantes::*;
+use serde::{Serialize, Deserialize};
 
 #[allow(dead_code)]
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Serialize, Deserialize)]
 pub struct DistressCall{
     pub id : i32, // id of a distress call
     pub secret_key: String, // key generated that is neede in order to change data
