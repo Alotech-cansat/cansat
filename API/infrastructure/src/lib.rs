@@ -58,3 +58,11 @@ fn find_by_secret_key(){
 
     assert_eq!(res, expected_res);
 }
+
+#[test]
+fn get_all(){
+    use crate::database::Database;
+    use repository::idistresscallrepo::*;
+
+    Database::get_all();
+}

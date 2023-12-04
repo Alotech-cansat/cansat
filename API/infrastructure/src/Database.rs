@@ -93,7 +93,18 @@ impl IDistressCallRepository for Database{
     }
 
     fn get_all() -> Vec<DistressCall>{
-        todo!()
+        let connection = &mut Database::get_connection();
+    
+        let result = distress_calls
+            .load::<DataBaseDistressSignal>(connection);
+            
+
+            match result {
+                Ok(record) => record.into_iter().map(|x| {
+                        x.get()
+                    }).collect(),
+                Err(_) => vec![],
+            }
     }
 
     fn delete(distress_call_secret_key:String){
