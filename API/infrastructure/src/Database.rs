@@ -118,7 +118,21 @@ impl IDistressCallRepository for Database{
     }
 
     fn update(distress_call_secret_key:String, distress_call_cordinates: Cordinates, distress_call_details:String) -> DistressCallCreation{
-        todo!()
+        let connection = &mut Database::get_connection();
+        let string_cordinates = distress_call_cordinates.get_string();
+
+        let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
+            .set((
+                call_cordinates.eq(string_cordinates),
+                details.eq(distress_call_details)
+            ))
+            .execute(connection);
+
+        match res{
+            Ok(x) => DistressCallCreation::Ok(distress_call_secret_key),
+            _ => DistressCallCreation::FailedToCreate
+        }
+        
     } // will return the Same SecretKey
 
 }

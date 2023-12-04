@@ -84,6 +84,18 @@ fn get_all(){
 }
 
 #[test]
+fn update(){
+    use crate::database::Database;
+    use repository::idistresscallrepo::*;
+
+    match Database::get_by_id(Database::get_highest_id()) {
+        DistressCallFind::Ok(x) => Database::update(x.secret_key, x.call_cordinates, x.details),
+        DistressCallFind::DoesNotExists => panic!("error") 
+        
+    };
+}
+
+#[test]
 fn delete(){
     use crate::database::Database;
     use repository::idistresscallrepo::*;
