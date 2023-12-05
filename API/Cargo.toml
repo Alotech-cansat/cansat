@@ -11,5 +11,9 @@ path = "infrastructure"
 [dependencies.data]
 path = "data"
 
+[dependencies.repository]
+path = "repository"
+
 [dependencies]
-rocket = "0.5.0"
+rocket = { version = "0.5.0", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
