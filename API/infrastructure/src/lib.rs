@@ -106,3 +106,15 @@ fn delete(){
         
     };
 }
+
+#[test]
+fn convert_from_string(){
+    use data::cordiantes::Cordinates;
+    
+    match Cordinates::new_from_string(String::from("123.12 123.21")){
+        Ok(x) => println!("working"),
+        _ => panic!("failed")
+    }
+
+
+}
