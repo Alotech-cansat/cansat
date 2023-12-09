@@ -4,8 +4,8 @@ use infrastructure::database::*;
 use rocket::serde::json::Json;
 use rocket::http::Status;
 
-#[macro_use] extern crate rocket;
 
+#[macro_use] extern crate rocket;
 
 
 
@@ -54,9 +54,20 @@ fn delete(secret_key:String) -> String {
     
 }
 
+#[get("/")]
+fn get_all() -> Json<Vec<DistressCall>> {
+
+    Json(Database::get_all())
+
+
+    
+}
+
+
+
 
 #[rocket::main]
 async fn main() {
-    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete] ).launch().await.unwrap();
+    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete, get_all] ).launch().await.unwrap();
 }
 
