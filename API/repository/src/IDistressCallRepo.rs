@@ -27,7 +27,7 @@ pub trait IDistressCallRepository{
 
     fn delete(secret_key:String);
 
-    fn update(secret_key:String, location: Cordinates, details:String) -> DistressCallCreation; // will return the Same SecretKey
+    fn update(secret_key:String, location: Option<Cordinates>, details:Option<String>) -> DistressCallCreation; // will return the Same SecretKey
 
     
 

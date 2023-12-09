@@ -64,10 +64,34 @@ fn get_all() -> Json<Vec<DistressCall>> {
 }
 
 
+#[get("/update/<secret_key>?<cordinates>&<details>")]
+fn update(secret_key:String, cordinates:Option<String>, details:Option<String>) -> Result<String, Status> {
+    
+    let cords:Option<Cordinates> = match cordinates{
+        Some(x) => match Cordinates::new_from_string(x){
+            Ok(y) => Some(y),
+            Err(_) => return Err(Status::NotAcceptable)
+
+        },
+        None => None
+    };
+
+    match Database::update(secret_key, cords, details){
+        DistressCallCreation::Ok(x) => Ok(x),
+        DistressCallCreation::FailedToCreate => Err(Status::BadRequest),
+    }
+
+
+
+    
+}
+
+
+
 
 
 #[rocket::main]
 async fn main() {
-    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete, get_all] ).launch().await.unwrap();
+    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete, get_all, update] ).launch().await.unwrap();
 }
 

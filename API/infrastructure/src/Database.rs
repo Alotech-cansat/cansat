@@ -9,7 +9,7 @@ use crate::schema::distress_calls;
 use crate::schema::distress_calls::dsl::*;
 
 use repository::idistresscallrepo::*;
-use data::{distress_call::DistressCall, cordiantes::{Cordinates, self}};
+use data::{distress_call::DistressCall, cordiantes::Cordinates};
 
 const DATABASE_URL: &str = "C:/Users/Staś/Desktop/CANSAT/api/infrastructure/cansat.db";
 
@@ -128,7 +128,7 @@ impl IDistressCallRepository for Database{
                     .set(call_cordinates.eq(string_cordinates))
                     .execute(connection);
                 match res{
-                    Ok(x) => {succes += 1}
+                    Ok(_) => {succes += 1}
                     _ => {}
                 }
             },
@@ -142,7 +142,7 @@ impl IDistressCallRepository for Database{
                 .execute(connection);
 
                 match res{
-                    Ok(x) => {succes += 1}
+                    Ok(_) => {succes += 1}
                     _ => {}
                 }
             },
