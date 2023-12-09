@@ -45,10 +45,18 @@ fn create(cordinates:String, details:String) -> Result<String, Status> {
 }
 
 
+#[get("/delete/<secret_key>")]
+fn delete(secret_key:String) -> String {
+    let key = secret_key.clone();
+
+    Database::delete(secret_key);
+    return format!{"deleted distress call with secret_key {:?}", key};
+    
+}
 
 
 #[rocket::main]
 async fn main() {
-    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create] ).launch().await.unwrap();
+    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete] ).launch().await.unwrap();
 }
 
