@@ -9,7 +9,7 @@ use crate::schema::distress_calls;
 use crate::schema::distress_calls::dsl::*;
 
 use repository::idistresscallrepo::*;
-use data::{distress_call::DistressCall, cordiantes::Cordinates};
+use data::{distress_call::DistressCall, cordiantes::{Cordinates, self}};
 
 const DATABASE_URL: &str = "C:/Users/Staś/Desktop/CANSAT/api/infrastructure/cansat.db";
 
@@ -117,20 +117,44 @@ impl IDistressCallRepository for Database{
             .execute(connection);
     }
 
-    fn update(distress_call_secret_key:String, distress_call_cordinates: Cordinates, distress_call_details:String) -> DistressCallCreation{
+    fn update(distress_call_secret_key:String, distress_call_cordinates: Option<Cordinates>, distress_call_details:Option<String>) -> DistressCallCreation{
         let connection = &mut Database::get_connection();
-        let string_cordinates = distress_call_cordinates.get_string();
+        let mut succes = 0;
 
-        let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
-            .set((
-                call_cordinates.eq(string_cordinates),
-                details.eq(distress_call_details)
-            ))
-            .execute(connection);
+        match distress_call_cordinates{
+            Some(x) => {
+                let string_cordinates = x.get_string();
+                let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
+                    .set(call_cordinates.eq(string_cordinates))
+                    .execute(connection);
+                match res{
+                    Ok(x) => {succes += 1}
+                    _ => {}
+                }
+            },
+            _ => {succes+=1;}
+        }
 
-        match res{
-            Ok(_) => DistressCallCreation::Ok(distress_call_secret_key),
-            _ => DistressCallCreation::FailedToCreate
+        match distress_call_details{
+            Some(x) => {
+                let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
+                .set(details.eq(x))
+                .execute(connection);
+
+                match res{
+                    Ok(x) => {succes += 1}
+                    _ => {}
+                }
+            },
+            _ => {succes+=1}
+        }
+        
+
+        if succes == 2{
+            DistressCallCreation::Ok(distress_call_secret_key)}
+            else
+        {
+            DistressCallCreation::FailedToCreate
         }
         
     } // will return the Same SecretKey

@@ -89,7 +89,7 @@ fn update(){
     use repository::idistresscallrepo::*;
 
     match Database::get_by_id(Database::get_highest_id()) {
-        DistressCallFind::Ok(x) => Database::update(x.secret_key, x.call_cordinates, x.details),
+        DistressCallFind::Ok(x) => Database::update(x.secret_key, Some(x.call_cordinates), Some(x.details)),
         DistressCallFind::DoesNotExists => panic!("error") 
         
     };
