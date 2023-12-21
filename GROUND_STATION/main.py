@@ -1,7 +1,6 @@
 from lib import *
 from typing import List
-class DistressCall:
-    pass
+
 
 class GroundStation:
     def __init__(self):
@@ -9,3 +8,5 @@ class GroundStation:
 
     def run(self):
         pass
+
+
