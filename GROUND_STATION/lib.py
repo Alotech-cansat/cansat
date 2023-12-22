@@ -26,19 +26,25 @@ class DistressCall:
 BASE_URL = "http://127.0.0.1:8000"
 
 def get_by_id(id:int):
-    res = requests.get(BASE_URL + f"/get_by_id/{id}")
-    return DistressCall.from_json(res.json())
+    try: 
+        res = requests.get(BASE_URL + f"/get_by_id/{id}")
+        return DistressCall.from_json(res.json())
+    except:
+        return "Not found"
 
 def get_by_secret_key(secret_key: str):
-
-    res = requests.get(BASE_URL + f"/get_by_secret_key/{secret_key}")
-    return DistressCall.from_json(res.json())
-
+    try:
+            
+        res = requests.get(BASE_URL + f"/get_by_secret_key/{secret_key}")
+        return DistressCall.from_json(res.json())
+    except:
+        return "Not found"
+    
 def new_distress_call(cordinates:str, details:str):
     pass
 
 def delete(secret_key:str):
-    pass
+    requests.get(BASE_URL + f"/delete/{secret_key}")
 
 def update(secret_key:str, cordinates:str, details:str):
     pass
