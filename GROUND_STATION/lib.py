@@ -1,4 +1,5 @@
 import requests
+from typing import List
 
 class DistressCall:
     
@@ -19,8 +20,7 @@ class DistressCall:
         return obj
 
     def __repr__(self):
-        return f'''id: {self.id},\ncall_cordinates: {self.call_cordinates},\ndetails: {self.details}
-        '''
+        return f'''id: {self.id},\ncall_cordinates: {self.call_cordinates},\ndetails: {self.details}'''
 
 
 BASE_URL = "http://127.0.0.1:8000"
@@ -39,7 +39,15 @@ def get_by_secret_key(secret_key: str):
         return DistressCall.from_json(res.json())
     except:
         return "Not found"
-    
+
+def get_all() -> List[DistressCall]:
+    try:
+        res = requests.get(BASE_URL)
+        return [DistressCall.from_json(i) for i in res.json()]
+    except:
+        return "error"
+
+
 def new_distress_call(cordinates:str, details:str):
     pass
 
