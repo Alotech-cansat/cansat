@@ -49,7 +49,11 @@ def get_all() -> List[DistressCall]:
 
 
 def new_distress_call(cordinates:str, details:str):
-    pass
+    try:
+        res = requests.get(BASE_URL + f"/new_distress_call/{cordinates}/{details}")
+        return res.text
+    except:
+        return "error"
 
 def delete(secret_key:str):
     requests.get(BASE_URL + f"/delete/{secret_key}")
