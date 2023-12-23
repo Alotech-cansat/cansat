@@ -58,5 +58,16 @@ def new_distress_call(cordinates:str, details:str):
 def delete(secret_key:str):
     requests.get(BASE_URL + f"/delete/{secret_key}")
 
-def update(secret_key:str, cordinates:str, details:str):
-    pass
+def update(secret_key:str, cordinates:str = None , details:str = None):
+    try:
+        if cordinates != None and details != None:
+            res = requests.get(BASE_URL + f'/update/{secret_key}?cordinates={cordinates}&details={details}')
+        elif cordinates != None:
+            res = requests.get(BASE_URL + f'/update/{secret_key}?cordinates={cordinates}')
+        elif details != None:
+            res = requests.get(BASE_URL + f'/update/{secret_key}?details={details}')
+        else:
+            return "error"
+        return res.text
+    except:
+        return "error"
