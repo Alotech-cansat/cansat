@@ -1,4 +1,4 @@
-use data::{distress_call::DistressCall, cordiantes::Cordinates};
+use data::{distress_call::DistressCall, cordiantes::{Cordinates, self}};
 
 #[derive(PartialEq, Debug)]
 pub enum DistressCallFind{
@@ -29,6 +29,6 @@ pub trait IDistressCallRepository{
 
     fn update(secret_key:String, location: Option<Cordinates>, details:Option<String>) -> DistressCallCreation; // will return the Same SecretKey
 
-    
+    fn get_closest(cordiantes: Cordinates) -> Result<DistressCall, String>;
 
 }

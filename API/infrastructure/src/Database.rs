@@ -1,4 +1,6 @@
 
+use std::cmp::Ordering;
+
 use diesel::sqlite::SqliteConnection;
 use diesel::prelude::*;
 
@@ -65,6 +67,25 @@ impl IDistressCallRepository for Database{
             .expect("Error");
 
         return DistressCallCreation::Ok(new_call.secret_key);
+    }
+
+    fn get_closest(cordinates: Cordinates) -> Result<DistressCall, String>{
+        let mut distress_calls_vec = Database::get_all();
+        
+        distress_calls_vec.sort_by(|a, b| {
+            let distance_a = a.call_cordinates.get_distance(&cordinates);
+            let distance_b = b.call_cordinates.get_distance(&cordinates);
+    
+            distance_a.partial_cmp(&distance_b).unwrap_or(Ordering::Equal)
+        });
+
+    match distress_calls_vec.get(0).cloned(){
+        Some(x) => Ok(x),
+        None => Err(String::from("empty db"))
+
+    }
+
+
     }
 
     fn get_by_id(distress_call_id:i32) -> DistressCallFind{

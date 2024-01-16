@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 
 
-#[derive(PartialEq, Debug, Serialize, Deserialize)]
+#[derive(PartialEq,PartialOrd, Debug, Serialize, Deserialize, Clone)]
 pub struct Cordinates{
     pub latitude: f64,
     pub longitude: f64,
@@ -45,6 +45,10 @@ impl Cordinates{
         return format!("{} {}", self.latitude, self.longitude);
 
        
+    }
+
+    pub fn get_distance(&self, cord: &Cordinates) -> f64{
+        f64::sqrt(f64::powf(cord.latitude - self.latitude, 2.0) +  f64::powf(cord.longitude - self.longitude, 2.0))
     }
 
 

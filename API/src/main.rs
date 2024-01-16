@@ -8,7 +8,20 @@ use rocket::http::Status;
 #[macro_use] extern crate rocket;
 
 
+#[get("/get_closest/<cordinates>")]
+fn get_closest(cordinates:String) -> Result<Json<DistressCall>, Status>{
+    let cord = match Cordinates::new_from_string(cordinates){
+        Ok(x) => x,
+        Err(x) => {
+            println!("{:?}", x);
+            return  Err(Status::NotAcceptable)}
+    };
 
+    match Database::get_closest(cord){
+        Ok(x) => return Ok(Json(x)),
+        _ => Err(Status::NotAcceptable)
+    }
+}
 
 #[get("/get_by_id/<id>")]
 fn get_by_id(id:i32) -> Result<Json<DistressCall>, Status> {
@@ -92,6 +105,6 @@ fn update(secret_key:String, cordinates:Option<String>, details:Option<String>) 
 
 #[rocket::main]
 async fn main() {
-    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete, get_all, update] ).launch().await.unwrap();
+    rocket::build().mount("/", routes![get_by_id, get_by_secret_key, create, delete, get_all, update, get_closest] ).launch().await.unwrap();
 }
 
