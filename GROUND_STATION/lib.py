@@ -65,7 +65,7 @@ def get_all() -> List[DistressCall]:
         return "error"
 
 
-def new_distress_call(cordinates:str, details:str):
+def new_distress_call(cordinates:Cordinates, details:str):
     try:
         res = requests.get(BASE_URL + f"/new_distress_call/{cordinates}/{details}")
         return res.text
@@ -85,6 +85,14 @@ def update(secret_key:str, cordinates:str = None , details:str = None):
             res = requests.get(BASE_URL + f'/update/{secret_key}?details={details}')
         else:
             return "error"
+        return res.text
+    except:
+        return "error"
+    
+def get_closest(cordinates:Cordinates):
+    try:
+        res = requests.get(BASE_URL + f"/get_closest/{cordinates.latitude} {cordinates.longitude}")
+
         return res.text
     except:
         return "error"
