@@ -43,7 +43,7 @@ fn get_by_secret_key(secret_key:String) -> Result<Json<DistressCall>, Status> {
 
 
 #[get("/new_distress_call/<cordinates>/<details>")]
-fn create(cordinates:String, details:String) -> Result<String, Status> {
+fn create(cordinates:String, details:i64) -> Result<String, Status> {
     let cord = match Cordinates::new_from_string(cordinates){
         Ok(x) => x,
         Err(x) => {
@@ -78,7 +78,7 @@ fn get_all() -> Json<Vec<DistressCall>> {
 
 
 #[get("/update/<secret_key>?<cordinates>&<details>")]
-fn update(secret_key:String, cordinates:Option<String>, details:Option<String>) -> Result<String, Status> {
+fn update(secret_key:String, cordinates:Option<String>, details:Option<i64>) -> Result<String, Status> {
     
     let cords:Option<Cordinates> = match cordinates{
         Some(x) => match Cordinates::new_from_string(x){

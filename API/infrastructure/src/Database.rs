@@ -49,7 +49,7 @@ impl Database{
 
 impl IDistressCallRepository for Database{
 
-    fn create(distress_call_cordinates: Cordinates, distress_call_details: String) -> DistressCallCreation {
+    fn create(distress_call_cordinates: Cordinates, distress_call_details: i64) -> DistressCallCreation {
 
         let distress_call_secret_key = Database::generate_secret_key();
         let distress_call_cordinates = distress_call_cordinates.get_string();
@@ -59,7 +59,7 @@ impl IDistressCallRepository for Database{
         let new_call = NewDistressCall {  
             secret_key:distress_call_secret_key, 
             call_cordinates:distress_call_cordinates, 
-            details: distress_call_details };
+            details: distress_call_details.to_string()};
 
         diesel::insert_into(distress_calls::table)
             .values(&new_call)
@@ -138,7 +138,7 @@ impl IDistressCallRepository for Database{
             .execute(connection);
     }
 
-    fn update(distress_call_secret_key:String, distress_call_cordinates: Option<Cordinates>, distress_call_details:Option<String>) -> DistressCallCreation{
+    fn update(distress_call_secret_key:String, distress_call_cordinates: Option<Cordinates>, distress_call_details:Option<i64>) -> DistressCallCreation{
         let connection = &mut Database::get_connection();
         let mut succes = 0;
 
@@ -158,14 +158,28 @@ impl IDistressCallRepository for Database{
 
         match distress_call_details{
             Some(x) => {
-                let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
-                .set(details.eq(x))
-                .execute(connection);
 
-                match res{
-                    Ok(_) => {succes += 1}
+                let distress_call: DistressCallFind = Self::get_by_secret_key(distress_call_secret_key.clone());
+
+                match distress_call{
+                    DistressCallFind::Ok(result) => {
+
+                        let mut details_vec = result.details;
+                        details_vec.push(x);
+                        let details_vec = details_vec.iter().map(|n| n.to_string()).collect::<Vec<_>>().join(",");
+                        
+                        let res = diesel::update(distress_calls.filter(secret_key.eq(distress_call_secret_key.clone())))
+                            .set(details.eq(details_vec))
+                            .execute(connection);
+
+                        match res{
+                            Ok(_) => {succes += 1}
+                            _ => {}
+                        }
+                        
+                    },
                     _ => {}
-                }
+                };  
             },
             _ => {succes+=1}
         }

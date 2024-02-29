@@ -2,6 +2,7 @@ use diesel::prelude::*;
 use data::{distress_call::DistressCall, cordiantes::Cordinates};
 use crate::schema::distress_calls::{self, };
 
+
 #[derive(Queryable, PartialEq, Debug)]
 #[diesel(table_name = distress_calls)]
 pub struct DataBaseDistressSignal{
@@ -24,7 +25,7 @@ impl DataBaseDistressSignal{
             id:self.id,
             secret_key:self.secret_key,
             call_cordinates: cordiantes,
-            details: self.details
+            details: self.details.split(',').map(|s| s.parse().unwrap()).collect()
 
         }
 
