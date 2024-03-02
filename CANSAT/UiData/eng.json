@@ -1,0 +1,142 @@
+{
+    "BodyParts":[
+
+        {
+            "id":11,
+            "name":"Head",
+            "PossibleInjuries":[12, 13, 14, 15, 16, 17, 18, 19, 20,21, 22]
+        },
+        {
+            "id":12,
+            "name":"Neck",
+            "PossibleInjuries":[12,13,14,15,16,17,20,21, 22]
+        },
+        {
+            "id":13,
+            "name":"Chest",
+            "PossibleInjuries":[12,13,14,15,16,17,20, 21, 22]
+        },
+        {
+            "id":14,
+            "name":"Belly",
+            "PossibleInjuries":[12,13,14,15,16,17,21, 22]
+        },
+        {
+            "id":15,
+            "name":"Back",
+            "PossibleInjuries":[12, 13, 14, 15, 16, 17,21,  22]
+        },
+        {
+            "id":16,
+            "name":"Right Hand",
+            "PossibleInjuries":[11, 12, 13, 14, 15, 16, 17, 21, 22]
+        },
+        {
+            "id":17,
+            "name":"Left Hand",
+            "PossibleInjuries":[11, 12, 13, 14, 15, 16, 17, 21, 22]
+        },
+        {
+            "id":18,
+            "name":"Right Leg",
+            "PossibleInjuries":[11, 12, 13, 14, 15, 16, 17, 21, 22]
+        },
+        {
+            "id":19,
+            "name":"Left Leg",
+            "PossibleInjuries":[11, 12, 13, 14, 15, 16, 17, 21, 22]
+        },
+        {
+            "id":20,
+            "name":"Other",
+            "PossibleInjuries":[11, 12, 13, 14, 15, 16, 17,18, 19, 20, 21, 22]
+        }
+
+    ],
+    "Injuries":[
+        {
+            "id":11,
+            "name":"Sprain",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":12,
+            "name":"Fracture",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":13,
+            "name":"Cut",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":14,
+            "name":"Burn",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":15,
+            "name":"Stab Wound",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":16,
+            "name":"Lacerated Wound",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":17,
+            "name":"Bite",
+            "AskAboutPainLevel": true
+        },
+        {
+            "id":18,
+            "name":"Vomit",
+            "AskAboutPainLevel": false
+        },
+        {
+            "id":19,
+            "name":"Blackout",
+            "AskAboutPainLevel": false
+        },
+        {
+            "id":20,
+            "name":"Breathing Problems",
+            "AskAboutPainLevel": false
+        },
+        {
+            "id":21,
+            "name":"Sensory Loss",
+            "AskAboutPainLevel": false
+        },
+        {
+            "id":22,
+            "name":"Other",
+            "AskAboutPainLevel": false
+        }
+    ],
+    "Pain Level":[
+        {
+            "id":11,
+            "name":"Mild Pain"
+        },
+        {
+            "id":12,
+            "name":"Moderate Pain"
+        },
+        {
+            "id":13,
+            "name":"Moderatelt Severe Pain"
+        },
+        {
+            "id":14,
+            "name":"Severe Pain"
+        },
+        {
+            "id":12,
+            "name":"Extreme Pain"
+        }
+        
+        
+    ]
+}
