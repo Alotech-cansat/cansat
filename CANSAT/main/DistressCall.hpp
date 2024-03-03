@@ -16,9 +16,14 @@ class DistressCall{
        return this -> distress_calls;
     }
 
-    vector<string> get_choices(){
-      
+    vector<Option> get_choices(){
+      //TODO:
     }
+
+    void choose(){
+      //TODO:
+      current_level++; 
+     }
 
     
   private:
@@ -29,5 +34,6 @@ class DistressCall{
     int body_part;
     int injury;
     int pain_level;
-    
+
+    int current_level = 0;
 };
