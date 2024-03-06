@@ -1,11 +1,15 @@
-#include "DistressCall.hpp"
+//#include "DistressCall.hpp"
 
-void setup() {
-  // put your setup code here, to run once:
+//DistressCall mycall;
+
+void setup(){
+  Serial.begin(9600);
+
 
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop(){
+  Serial.println("hej");
 
+  //mycall.get_langs();
 }

@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <SD.h>
+
+#define languages_file "/Data/langs.js"
 
 using namespace std;
 
@@ -17,9 +20,13 @@ class DistressCall{
     }
 
     vector<Option> get_choices(){
-      //TODO:
+      
     }
 
+    vector<Option> get_langs(){
+      File file = SD.open(languages_file);
+    }
+    
     void choose(){
       //TODO:
       current_level++; 
