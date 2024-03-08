@@ -6,25 +6,30 @@
 
 #define languages_file "/Data/langs.js"
 
+File file = SD.open(languages_file);
+
 using namespace std;
 
-struct Option{
+
+struct MenuOption{
   int id;
   string name;
 };
 
 class DistressCall{
   public:
+    DistressCall(){}
+    
     vector<int> get_distress_calls(){
        return this -> distress_calls;
     }
 
-    vector<Option> get_choices(){
+    vector<MenuOption> get_choices(){
       
     }
 
-    vector<Option> get_langs(){
-      File file = SD.open(languages_file);
+    vector<MenuOption> get_langs(){
+      
     }
     
     void choose(){
