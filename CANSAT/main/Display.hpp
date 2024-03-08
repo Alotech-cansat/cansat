@@ -9,6 +9,8 @@
 #define WHITE 0xFFFF
 #define BLUE 0x00FF
 
+using namespace std;
+
 struct DisplayOption{
   int id;
   string name;
@@ -35,7 +37,7 @@ void fill_screen(unsigned int color){
 }
 
 
-int draw_option(string Text){
+int new_option(string Text){
   
   tft.fillRect(0, x, tft.width(), ROWSIZE, BLACK);
   
@@ -53,12 +55,21 @@ int draw_option(string Text){
   return new_struct.id;
 }
 
+void draw_option_at(int place, int id, unsigned int color = BLACK){
+  tft.fillRect(0, ROWSIZE * place + place, tft.width(), ROWSIZE , color);
+  
+  tft.drawString(display_option[id].name.c_str(), tft.width() / 2, ROWSIZE / 2 + ROWSIZE * place + place - 1);
+}
+
+
 void choose(int id){
   tft.fillRect(0, ROWSIZE * id + id, tft.width(), ROWSIZE , BLUE);
   
   tft.drawString(display_option[id].name.c_str(), tft.width() / 2, ROWSIZE / 2 + ROWSIZE * id + id - 1);
   
 }
+
+
 
 void unchoose(int id){
   tft.fillRect(0, ROWSIZE * id + id, tft.width(), ROWSIZE , BLACK);
@@ -68,11 +79,26 @@ void unchoose(int id){
 }
 
 void next(){
-  unchoose(current_id);
-  current_id = (current_id + 1) % display_option.size();
-  choose(current_id);
+
+
+
+  draw_option_at(0, (current_id - 2) % display_option.size());
+  draw_option_at(1,  (current_id - 1) % display_option.size());
+  draw_option_at(2,  (current_id) % display_option.size(), BLUE);
+  draw_option_at(3,  (current_id + 1)% display_option.size());
+  draw_option_at(4,  (current_id + 2) % display_option.size());
+  
+
+  current_id++;
 }
 
 void back(){
+  draw_option_at(0, (current_id - 2) % display_option.size());
+  draw_option_at(1,  (current_id - 1) % display_option.size());
+  draw_option_at(2,  (current_id) % display_option.size(), BLUE);
+  draw_option_at(3,  (current_id + 1)% display_option.size());
+  draw_option_at(4,  (current_id + 2) % display_option.size());
+  
+
   current_id--;
 }

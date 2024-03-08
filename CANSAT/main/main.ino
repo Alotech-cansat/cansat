@@ -12,23 +12,25 @@ void setup(){
   intialize_screen();
   fill_screen(WHITE);
 
-  draw_option("aaaaaaaaaaaaaaaa");
-  draw_option("aaaaaaaaaaaaaaaa");
-  draw_option("aaaaaaaaaaaaaaaa");
-  draw_option("aaaaaaaaaaaaaaaa");
-  draw_option("aaaaaaaaaaaaaaaa");
+  new_option("aaaaaaaaaaaaaaaa");
+  new_option("bbbbbbbbbbbbbbbb");
+  new_option("cccccccccccccccc");
+  new_option("dddddddddddddddd");
+  new_option("eeeeeeeeeeeeeeee");
 
   choose(2);
 
 }
 
 void loop(){
-  Serial.println(x);
+
   //mycall.get_langs();
-  //next();
-  unchoose((current_id) % display_option.size());
-  choose((current_id + 1) % display_option.size());
-  current_id++;
+  back();
+  //draw_option(0, 2);
+  
+  //unchoose((current_id) % display_option.size());
+  //draw_option_at((current_id + 1) % display_option.size());
+  //current_id++;
   delay(3000);
 
 }
