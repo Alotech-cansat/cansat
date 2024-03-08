@@ -62,21 +62,7 @@ void draw_option_at(int place, int id, unsigned int color = BLACK){
 }
 
 
-void choose(int id){
-  tft.fillRect(0, ROWSIZE * id + id, tft.width(), ROWSIZE , BLUE);
-  
-  tft.drawString(display_option[id].name.c_str(), tft.width() / 2, ROWSIZE / 2 + ROWSIZE * id + id - 1);
-  
-}
 
-
-
-void unchoose(int id){
-  tft.fillRect(0, ROWSIZE * id + id, tft.width(), ROWSIZE , BLACK);
-
-  
-  tft.drawString(display_option[id].name.c_str(), tft.width() / 2, ROWSIZE / 2 + ROWSIZE * id + id - 1);
-}
 
 void next(){
 
