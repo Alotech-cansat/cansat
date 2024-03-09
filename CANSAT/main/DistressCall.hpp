@@ -4,15 +4,22 @@
 #include <vector>
 #include <SD.h>
 
-#define languages_file "/Data/langs.js"
+//#include "/lang.txt"
 
-File file = SD.open(languages_file);
+const char *languages_filename = "/lang.txt";
+
+File lang_file = SD.open(languages_filename);
 
 using namespace std;
 
 
 struct MenuOption{
   int id;
+  string name;
+};
+
+struct LangOption{
+  string file;
   string name;
 };
 
@@ -28,7 +35,40 @@ class DistressCall{
       
     }
 
-    vector<MenuOption> get_langs(){
+    vector<LangOption> get_langs(){
+      vector<LangOption> result;
+  
+      StaticJsonDocument<2048> doc;
+
+      if (!lang_file){
+          Serial.println(F("File not found"));
+          return result;     
+      }
+      
+      DeserializationError error = deserializeJson(doc, lang_file);
+      if (error) {
+          Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
+          return result;
+      }
+  
+      if (!doc.is<JsonArray>()) {
+          Serial.println(F("File does not contain an array"));
+          return result;
+      }
+  
+      JsonArray array = doc.as<JsonArray>();
+      for (JsonObject obj : array) {
+          for (JsonPair pair : obj) {
+              LangOption new_lang;
+              new_lang.name = pair.key().c_str(); // Get the key (language)
+              new_lang.file = pair.value().as<const char*>();;
+              result.push_back(new_lang);
+          }
+      }
+  
+      lang_file.close();
+  
+      return result;
       
     }
     
