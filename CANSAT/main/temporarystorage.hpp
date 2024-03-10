@@ -1,0 +1,155 @@
+//This file will be replaced by files on sd card eventually
+#include <iostream>
+
+
+const char *language_file = "[\
+    {\
+        \"English\": \"eng.json\"\
+    },\
+    {\
+        \"Polski\": \"pl.json\"\
+    }\
+]";
+
+
+const char *pl = "{\
+    \"BodyParts\":\
+    [\
+        {\
+            \"id\":11,\
+            \"name\":\"Głowa\",\
+            \"PossibleInjuries\":[12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]\
+        },\
+        {\
+            \"id\":12,\
+            \"name\":\"Szyja\",\
+            \"PossibleInjuries\":[12, 13, 14, 15, 16, 17, 20, 21, 22]\
+        },\
+        {\
+            \"id\":13,\
+            \"name\":\"Klatka piersiowa\",\
+            \"PossibleInjuries\":[12, 13, 14, 15, 16, 17, 20, 21, 22]\
+        },\
+        {\
+            \"id\":14,\
+            \"name\":\"Brzuch\",\
+            \"PossibleInjuries\":[12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":15,\
+            \"name\":\"Plecy\",\
+            \"PossibleInjuries\":[12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":16,\
+            \"name\":\"Prawa ręka\",\
+            \"PossibleInjuries\":[11, 12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":17,\
+            \"name\":\"Lewa ręka\",\
+            \"PossibleInjuries\":[11, 12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":18,\
+            \"name\":\"Prawa noga\",\
+            \"PossibleInjuries\":[11, 12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":19,\
+            \"name\":\"Lewa noga\",\
+            \"PossibleInjuries\":[11, 12, 13, 14, 15, 16, 17, 21, 22]\
+        },\
+        {\
+            \"id\":20,\
+            \"name\":\"Inne\",\
+            \"PossibleInjuries\":[11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]\
+        }\
+    ],\
+    \"Injuries\":\
+    [\
+        {\
+            \"id\":11,\
+            \"name\":\"Skręcenie / Zwichnięcie\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":12,\
+            \"name\":\"Złamanie\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":13,\
+            \"name\":\"Skaleczenie\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":14,\
+            \"name\":\"Oparzenie\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":15,\
+            \"name\":\"Rana kłuta\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":16,\
+            \"name\":\"Rana szarpana\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":17,\
+            \"name\":\"Ugryzienie\",\
+            \"AskAboutPainLevel\": true\
+        },\
+        {\
+            \"id\":18,\
+            \"name\":\"Wymioty\",\
+            \"AskAboutPainLevel\": false\
+        },\
+        {\
+            \"id\":19,\
+            \"name\":\"Omdlenie\",\
+            \"AskAboutPainLevel\": false\
+        },\
+        {\
+            \"id\":20,\
+            \"name\":\"Problemy z oddychaniem\",\
+            \"AskAboutPainLevel\": false\
+        },\
+        {\
+            \"id\":21,\
+            \"name\":\"Utrata czucia\",\
+            \"AskAboutPainLevel\": false\
+        },\
+        {\
+            \"id\":22,\
+            \"name\":\"Inne\",\
+            \"AskAboutPainLevel\": false\
+        }\
+    ],\
+    \"Pain Level\":\
+    [\
+        {\
+            \"id\":11,\
+            \"name\":\"Lekki ból\"\
+        },\
+        {\
+            \"id\":12,\
+            \"name\":\"Średni ból\"\
+        },\
+        {\
+            \"id\":13,\
+            \"name\":\"Średnio silny ból\"\
+        },\
+        {\
+            \"id\":14,\
+            \"name\":\"Silny ból\"\
+        },\
+        {\
+            \"id\":15,\
+            \"name\":\"Ekstremalny ból\"\
+        }\
+    ]\
+}";

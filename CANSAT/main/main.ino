@@ -2,10 +2,15 @@
 #include "Display.hpp"
 
  
+//vars used only for testing
+bool click = false;
+int i = 0;
 
 
 DistressCall mycall;
 vector<LangOption> langs;
+
+bool IsChoosingLanguage = true;
 
 
 void setup(){
@@ -15,33 +20,35 @@ void setup(){
   fill_screen();
   langs = mycall.get_langs();
 
-  
-  new_option("aaaaaaaaaaaaaaaa");
-  new_option("bbbbbbbbbbbbbbbb");
-  new_option("cccccccccccccccc");
-  new_option("dddddddddddddddd");
-  new_option("eeeeeeeeeeeeeeee");
-
-
-
-
-
+  for(LangOption& i :langs){
+    new_option(i.name);
+  }
 }
 
 void loop(){
-  langs = mycall.get_langs();
-  Serial.println(langs.size());
-  for(LangOption& i : langs){
-    const char * str = i.name.c_str();
-    string s = str;
-    Serial.println("haloo ");
-    //Serial.println(i.file);  
+
+   
+  previous_option();
+  Serial.println(click);
+  if(click && IsChoosingLanguage){
+    clear_options();
+
+    vector<BodyPartOption> res = mycall.choose_lang(langs[ current_id % langs.size() ]);
+
+    for (BodyPartOption i :res){
+      new_option(i.name);
+
+      
+    }
+
+    IsChoosingLanguage = false;
+    Serial.println("da wat");
   }
 
-  Serial.println("halooooooooooooo");
-   
-  back();
-
+  
   delay(3000);
-
+  Serial.println(i);
+  if (i > 10){click = true;}
+  i++;
+  
 }

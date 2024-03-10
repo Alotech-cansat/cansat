@@ -3,24 +3,28 @@
 #include <fstream>
 #include <vector>
 #include <SD.h>
+#include "temporarystorage.hpp"
 
-//#include "/lang.txt"
+//Commented code is supposed to be uncommented when we get sd card and won't use temporarystorage.hpp
 
-const char *languages_filename = "/lang.txt";
+//const char *languages_filename = "/lang.txt";
 
-File lang_file = SD.open(languages_filename);
+//File lang_file = SD.open(languages_filename);
 
 using namespace std;
 
 
-struct MenuOption{
+struct BodyPartOption{
   int id;
-  string name;
+  String name;
+  vector<int> possible_injuries;
+
 };
 
 struct LangOption{
-  string file;
-  string name;
+  String file;
+  String name;
+  
 };
 
 class DistressCall{
@@ -31,21 +35,19 @@ class DistressCall{
        return this -> distress_calls;
     }
 
-    vector<MenuOption> get_choices(){
-      
-    }
+
 
     vector<LangOption> get_langs(){
       vector<LangOption> result;
   
       StaticJsonDocument<2048> doc;
 
-      if (!lang_file){
-          Serial.println(F("File not found"));
-          return result;     
-      }
+      //if(!lang_file){
+      //  Serial.println("language file not found");
+      //  return result;
+      //}
       
-      DeserializationError error = deserializeJson(doc, lang_file);
+      DeserializationError error = deserializeJson(doc, language_file);
       if (error) {
           Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
           return result;
@@ -66,22 +68,76 @@ class DistressCall{
           }
       }
   
-      lang_file.close();
+      //lang_file.close();
   
       return result;
       
     }
-    
-    void choose(){
-      //TODO:
+
+
+   
+    vector<BodyPartOption> choose_lang(LangOption file){
+      
+
+      this->language  = file.name;
+      this->json_file = file.file;
+      
       current_level++; 
+
+      return get_body_parts(file.file);
      }
+
+
+  vector<BodyPartOption> get_body_parts(String filename){
+    //File lang_file = SD.open(filename);
+    vector<BodyPartOption> result;
+  
+    StaticJsonDocument<2048> doc;
+
+    //if(!lang_file){
+    //  Serial.println("language file not found");
+    //  return result;
+    //}
+
+    DeserializationError error = deserializeJson(doc, pl); // For now always open pl file
+    if (error) {
+        Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
+        return result;
+    }
+
+    JsonArray bodyparts = doc["BodyParts"].as<JsonArray>();
+
+    for (JsonObject bodyPart : bodyparts) {
+
+      int id = bodyPart["id"];
+      const char* name = bodyPart["name"];
+      vector<int> possible_injuries;
+      JsonArray possibleInjuriesJson = bodyPart["PossibleInjuries"].as<JsonArray>();
+      for (int injury : possibleInjuriesJson) {
+        possible_injuries.push_back(injury);
+      } 
+
+      Serial.println(name);
+      BodyPartOption new_body_part;
+
+      new_body_part.name = name;
+      new_body_part.id   = id;
+      new_body_part.possible_injuries = possible_injuries;
+
+      result.push_back(new_body_part);
+      
+    }
+
+    return result;
+} 
+    
+    
 
     
   private:
     vector<int> distress_calls;
-    string language;
-    string json_file;
+    String language;
+    String json_file;
 
     int body_part;
     int injury;
