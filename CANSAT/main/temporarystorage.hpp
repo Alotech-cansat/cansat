@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-const char *language_file = "[\
+const char *temp_lang_file = "[\
     {\
         \"English\": \"eng.json\"\
     },\

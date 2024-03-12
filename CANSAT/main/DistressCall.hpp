@@ -2,14 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <SPI.h>
 #include <SD.h>
 #include "temporarystorage.hpp"
 
 //Commented code is supposed to be uncommented when we get sd card and won't use temporarystorage.hpp
 
-//const char *languages_filename = "/lang.txt";
-
-//File lang_file = SD.open(languages_filename);
+const char *languages_filename = "/lang.json";
 
 using namespace std;
 
@@ -27,9 +26,13 @@ struct LangOption{
   
 };
 
+
 class DistressCall{
   public:
-    DistressCall(){}
+    DistressCall(){
+    
+
+    }
     
     vector<int> get_distress_calls(){
        return this -> distress_calls;
@@ -39,7 +42,9 @@ class DistressCall{
 
     vector<LangOption> get_langs(){
       vector<LangOption> result;
-  
+      
+      //File lang_file = SD.open(languages_filename);
+
       StaticJsonDocument<2048> doc;
 
       //if(!lang_file){
@@ -47,7 +52,7 @@ class DistressCall{
       //  return result;
       //}
       
-      DeserializationError error = deserializeJson(doc, language_file);
+      DeserializationError error = deserializeJson(doc, temp_lang_file);
       if (error) {
           Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
           return result;

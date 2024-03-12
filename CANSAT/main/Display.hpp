@@ -38,7 +38,6 @@ void intialize_screen(){
   tft.setTextSize(FONTSIZE);
   tft.setTextColor(SECONDARY_COLOR);
 
-
   tft.setTextDatum(MC_DATUM);
 }
 
