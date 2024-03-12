@@ -6,6 +6,13 @@
 #include <SD.h>
 #include "temporarystorage.hpp"
 
+#define SDCARD_CS 34
+#define SDCARD_MOSI 35
+#define SDCARD_SCLK 36
+#define SDCARD_MISO 37
+
+SPIClass SDSPI(FSPI);
+
 //Commented code is supposed to be uncommented when we get sd card and won't use temporarystorage.hpp
 
 const char *languages_filename = "/lang.json";
@@ -30,7 +37,15 @@ struct LangOption{
 class DistressCall{
   public:
     DistressCall(){
-    
+            while(1){
+        if (!SD.begin(SDCARD_CS, SDSPI)) {
+          Serial.println("setup SD card FAILED");
+          
+        }else{
+          Serial.println("setup SD card succesfull");
+          break;
+          }
+        }
 
     }
     
@@ -43,16 +58,16 @@ class DistressCall{
     vector<LangOption> get_langs(){
       vector<LangOption> result;
       
-      //File lang_file = SD.open(languages_filename);
+      File lang_file = SD.open(languages_filename);
 
       StaticJsonDocument<2048> doc;
 
-      //if(!lang_file){
-      //  Serial.println("language file not found");
-      //  return result;
-      //}
+      if(!lang_file){
+        Serial.println("language file not found");
+        return result;
+      }
       
-      DeserializationError error = deserializeJson(doc, temp_lang_file);
+      DeserializationError error = deserializeJson(doc, lang_file);
       if (error) {
           Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
           return result;
@@ -73,7 +88,7 @@ class DistressCall{
           }
       }
   
-      //lang_file.close();
+      lang_file.close();
   
       return result;
       
@@ -94,17 +109,17 @@ class DistressCall{
 
 
   vector<BodyPartOption> get_body_parts(String filename){
-    //File lang_file = SD.open(filename);
+    File file = SD.open(filename);
     vector<BodyPartOption> result;
   
     StaticJsonDocument<2048> doc;
 
-    //if(!lang_file){
-    //  Serial.println("language file not found");
-    //  return result;
-    //}
+    if(!file){
+      Serial.println("language file not found");
+      return result;
+    }
 
-    DeserializationError error = deserializeJson(doc, pl); // For now always open pl file
+    DeserializationError error = deserializeJson(doc, file); // For now always open pl file
     if (error) {
         Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
         return result;
@@ -133,6 +148,7 @@ class DistressCall{
       
     }
 
+    file.close();
     return result;
 } 
     

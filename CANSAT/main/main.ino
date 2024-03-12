@@ -2,6 +2,10 @@
 #include "Display.hpp"
 #include "Encoder.hpp"
 
+
+
+
+
 //vars used only for testing
 bool click = false;
 int i = 0;
@@ -16,7 +20,8 @@ bool IsChoosingLanguage = true;
 void setup(){
 
   Serial.begin (9600);
-
+  pinMode(SDCARD_MISO, INPUT_PULLUP);
+  SDSPI.begin(SDCARD_SCLK, SDCARD_MISO, SDCARD_MOSI, SDCARD_CS);
 
 
   setup_encoder();
@@ -36,7 +41,10 @@ void setup(){
 
 void loop(){
 
-  
+   uint32_t cardSize = SD.cardSize() / (1024 * 1024);
+  Serial.print("setupSDCard PASS. SIZE = ");
+  Serial.print(cardSize);
+  Serial.println(" MB");
 
   if(click && IsChoosingLanguage){
     clear_options();
