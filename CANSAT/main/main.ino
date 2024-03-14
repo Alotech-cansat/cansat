@@ -12,18 +12,17 @@ int i = 0;
 
 DistressCall mycall;
 vector<LangOption> langs;
+vector<BodyPartOption> BodyParts;
+vector<InjuryOption> Injuries;
 
 bool IsChoosingLanguage = true;
+bool IsChoosingBodyPart = false;
 
 
 
 void setup(){
-
+  delay(5000);
   Serial.begin (9600);
-  pinMode(SDCARD_MISO, INPUT_PULLUP);
-  SDSPI.begin(SDCARD_SCLK, SDCARD_MISO, SDCARD_MOSI, SDCARD_CS);
-
-
   setup_encoder();
   
   langs = mycall.get_langs();
@@ -40,29 +39,44 @@ void setup(){
 
 
 void loop(){
-
-   uint32_t cardSize = SD.cardSize() / (1024 * 1024);
-  Serial.print("setupSDCard PASS. SIZE = ");
-  Serial.print(cardSize);
-  Serial.println(" MB");
+ 
 
   if(click && IsChoosingLanguage){
+    Serial.println("choosing lang");
     clear_options();
 
-    vector<BodyPartOption> res = mycall.choose_lang(langs[ current_id % langs.size() ]);
-
-    for (BodyPartOption i :res){
-      new_option(i.name);
-
+    BodyParts = mycall.choose_lang(langs[ current_id % langs.size() ]);
+  
+    for (BodyPartOption i :BodyParts){
       
+      new_option(i.name);
     }
 
     IsChoosingLanguage = false;
+    IsChoosingBodyPart = true;
+  }
+  else if (click && IsChoosingBodyPart){
+    Serial.println("choosing body part");
+    clear_options();
+
+    Injuries = mycall.choose_body_part(BodyParts[ current_id % langs.size() ]);
+
+    for (InjuryOption i :Injuries){
+      
+      new_option(i.name);
+    }
+
+    IsChoosingBodyPart = false;
   }
 
 
   delay(1000);
-  if (i > 10){click = true;}
+  if (i == 10){click = true;}
+  else if(i == 20){click = true;}
+  else{
+    click = false;
+  }
   i++;
+  Serial.println(i);
   
 }

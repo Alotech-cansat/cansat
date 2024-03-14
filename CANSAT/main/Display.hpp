@@ -28,7 +28,9 @@ std::vector<DisplayOption> display_option;
 TFT_eSPI tft = TFT_eSPI();    
 
 void clear_options(){
-  display_option = {};  
+  display_option.clear();  
+  current_id = 0;
+  x = 0;
 }
 
 void intialize_screen(){
