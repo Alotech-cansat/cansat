@@ -1,8 +1,6 @@
 #include <TFT_eSPI.h> 
 #include <stdio.h>
 
-
-
 #define ROWSIZE 50
 
 #define FONTSIZE 2
@@ -27,6 +25,9 @@ std::vector<DisplayOption> display_option;
 
 TFT_eSPI tft = TFT_eSPI();    
 
+
+
+
 void clear_options(){
   display_option.clear();  
   current_id = 0;
@@ -34,7 +35,7 @@ void clear_options(){
 }
 
 void intialize_screen(){
-  tft.begin();
+  tft.getSPIinstance().begin();
   tft.setRotation(2); // Landscape orientation, USB at bottom right
   tft.setSwapBytes(false);
   tft.setTextSize(FONTSIZE);

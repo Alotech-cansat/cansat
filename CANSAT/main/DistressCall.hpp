@@ -3,18 +3,20 @@
 #include <fstream>
 #include <vector>
 #include <SPI.h>
-#include <SD.h>
+#include <FS.h>
+#include "SD.h"
 #include "temporarystorage.hpp"
 
-#define SDCARD_CS 34
-#define SDCARD_MOSI 35
-#define SDCARD_SCLK 36
-#define SDCARD_MISO 37
-SPIClass SDSPI(FSPI);
+
+#define SDCARD_CS 8
+#define SDCARD_MOSI 11
+#define SDCARD_SCLK 7
+#define SDCARD_MISO 9
+
 
 //Commented code is supposed to be uncommented when we get sd card and won't use temporarystorage.hpp
 
-const char *languages_filename = "/lang.json";
+const String languages_filename= "/lang.json";
 
 using namespace std;
 
@@ -38,20 +40,7 @@ struct InjuryOption{
   bool ask_about_pain;
 };
 
-void initializeSD(){
 
-     pinMode(SDCARD_MISO, INPUT_PULLUP);
-     SDSPI.begin(SDCARD_SCLK, SDCARD_MISO, SDCARD_MOSI, SDCARD_CS);
-     while(1){
-      if (!SD.begin(SDCARD_CS, SDSPI)) {
-       Serial.println("setup SD card FAILED");
-          
-     }else{
-      Serial.println("setup SD card succesfull");
-      break;
-    }
-  }
-}  
 
 
 
@@ -68,20 +57,19 @@ class DistressCall{
 
 
 
-    vector<LangOption> get_langs(){
-      //initializeSD();
+    vector<LangOption> get_langs(fs::FS &fs){
       vector<LangOption> result;
       
-      //File lang_file = SD.open( languages_filename);
+      File lang_file = fs.open( languages_filename);
 
       StaticJsonDocument<1024> doc;
 
-      //if(!lang_file){
-      //  Serial.println("language file not found");
-      //  return result;
-      //}
+      if(!lang_file){
+        Serial.println("language file not found");
+        return result;
+      }
       
-      DeserializationError error = deserializeJson(doc, temp_lang_file);
+      DeserializationError error = deserializeJson(doc, lang_file);
       if (error) {
           Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
           return result;
@@ -102,7 +90,7 @@ class DistressCall{
           }
       }
   
-      //lang_file.close();
+      lang_file.close();
 
 
       return result;
@@ -111,7 +99,7 @@ class DistressCall{
 
 
    
-    vector<BodyPartOption> choose_lang(LangOption file){
+    vector<BodyPartOption> choose_lang(fs::FS &fs, LangOption file){
       Serial.println("halo");
 
       this->language  = file.name;
@@ -119,27 +107,27 @@ class DistressCall{
       
       current_level++; 
 
-      return get_body_parts(file.file);
+      return get_body_parts(fs, file.file);
      }
 
 
-  vector<BodyPartOption> get_body_parts(String filename){
-    //initializeSD();
+  vector<BodyPartOption> get_body_parts(fs::FS &fs, String filename){
+
        
     vector<BodyPartOption> result;
     
-    //File file = SD.open("/" +  filename);
+    File file = fs.open("/" +  filename);
 
   
     StaticJsonDocument<2048> doc;
    
-    //if(!file){
-    //  Serial.println("/" + filename + " file not found");
-    //  Serial.println(file);
-    //  return result;
-    //}
+    if(!file){
+      Serial.println("/" + filename + " file not found");
+      Serial.println(file);
+      return result;
+    }
 
-    DeserializationError error = deserializeJson(doc, pl); 
+    DeserializationError error = deserializeJson(doc, file); 
     if (error) {
         Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
         return result;
@@ -168,26 +156,25 @@ class DistressCall{
       
     }
 
-    //file.close();
+    file.close();
 
     return result;
 } 
 
    
-    vector<InjuryOption> choose_body_part(BodyPartOption body_part){
-      Serial.println("halo");
+    vector<InjuryOption> choose_body_part(fs::FS &fs,BodyPartOption body_part){
 
       this->body_part  = body_part.id;
 
     
       current_level++; 
 
-      return get_injuries(this->json_file, body_part.possible_injuries);
+      return get_injuries(fs, this->json_file, body_part.possible_injuries);
      }
 
     
-  vector<InjuryOption> get_injuries(String filename, vector<int> possible_injuries){
-    initializeSD();
+  vector<InjuryOption> get_injuries(fs::FS &fs,String filename, vector<int> possible_injuries){
+    //initializeSD();
        
     vector<InjuryOption> result;
     
