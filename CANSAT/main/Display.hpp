@@ -102,5 +102,9 @@ void previous_option(){
 
 
 void succes_message(){
-  fill_screen(PRIMARY_COLOR);
+  fill_screen(HIGHLIGHT_COLOR);
+  
+  tft.drawString("message sended ", tft.width() / 2, tft.height() / 2 - ROWSIZE);
+  tft.drawString("click button to ", tft.width() / 2, tft.height() / 2);
+  tft.drawString("send another message", tft.width() / 2, tft.height() / 2 + ROWSIZE);
 }

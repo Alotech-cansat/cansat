@@ -58,9 +58,22 @@ void setup_UI(){
   Serial.println("Setup finished");
 }
 
+void clear_ui(){
+  IsChoosingBodyPart = true;
+      clear_options();
+    
+    for (BodyPartOption i :BodyParts){
+      
+      new_option(i.name);
+    }
+    next_option();
+    delay(500);
+
+}
+
 void loop_ui(){
   
-  if(NextUiLevel && IsChoosingLanguage){
+  if(click && IsChoosingLanguage){
     Serial.println("choosing lang");
     
 
@@ -76,8 +89,9 @@ void loop_ui(){
 
     IsChoosingLanguage = false;
     IsChoosingBodyPart = true;
+    delay(500);
   }
-  else if (NextUiLevel && IsChoosingBodyPart){
+  else if (click && IsChoosingBodyPart){
     Serial.println("choosing body part");
     
 
@@ -92,7 +106,8 @@ void loop_ui(){
 
     IsChoosingBodyPart = false;
     IsChoosingInjury = true;
-  }else if(NextUiLevel && IsChoosingInjury){
+    delay(500);
+  }else if(click && IsChoosingInjury){
     Serial.println("sending");
     fill_screen();
     mycall.choose_injury( Injuries[ current_id % Injuries.size() ]);
@@ -104,10 +119,17 @@ void loop_ui(){
     mycall.secret_key = "null";//Send(mycall.get_code())
 
     succes_message();
+    delay(500);
+
+    while(!update_button_click()){
+
+    };
+    clear_ui();
   }
 
 
   click = update_button_click(); 
+/*  
   if (prev_button_state == false && click){
     
     NextUiLevel = true;
@@ -116,6 +138,6 @@ void loop_ui(){
   }
 
   prev_button_state = click;
-
+*/
  
 }
