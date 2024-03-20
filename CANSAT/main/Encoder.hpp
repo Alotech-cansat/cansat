@@ -1,5 +1,5 @@
 #define encoderPinA  2  
-#define encoderPinB  4 
+#define encoderPinB  3
 
 void doEncoder() {
   if (digitalRead(encoderPinB)==HIGH) {
@@ -14,5 +14,5 @@ void setup_encoder(){
   digitalWrite(encoderPinA, HIGH); 
   pinMode(encoderPinB, INPUT_PULLUP); 
   digitalWrite(encoderPinB, HIGH);
-  attachInterrupt(2, doEncoder, RISING);
+  attachInterrupt(encoderPinA, doEncoder, RISING);
 }

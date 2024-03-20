@@ -9,12 +9,26 @@
 
 
 #define SDCARD_CS 8
-#define SDCARD_MOSI 11
-#define SDCARD_SCLK 7
+#define SDCARD_MOSI 15
+#define SDCARD_SCLK 14
 #define SDCARD_MISO 9
 
+SPIClass SDSPI(FSPI);
 
-//Commented code is supposed to be uncommented when we get sd card and won't use temporarystorage.hpp
+void initializeSD(){
+
+     pinMode(SDCARD_MISO, INPUT_PULLUP);
+     SDSPI.begin(SDCARD_SCLK, SDCARD_MISO, SDCARD_MOSI, SDCARD_CS);
+     
+    if (!SD.begin(SDCARD_CS, SDSPI)) {
+       Serial.println("setup SD card FAILED");
+          
+     }else{
+      Serial.println("setup SD card succesfull");
+      
+    }
+  
+}  
 
 const String languages_filename= "/lang.json";
 
@@ -47,9 +61,13 @@ struct InjuryOption{
 
 class DistressCall{
   public:
+
+    string secret_key;
     DistressCall(){}
 
-
+    int get_code(){
+      return this->body_part * 100 + this->injury;
+    }
     
     vector<int> get_distress_calls(){
        return this -> distress_calls;
@@ -100,7 +118,7 @@ class DistressCall{
 
    
     vector<BodyPartOption> choose_lang(fs::FS &fs, LangOption file){
-      Serial.println("halo");
+
 
       this->language  = file.name;
       this->json_file = file.file;
@@ -145,7 +163,6 @@ class DistressCall{
         possible_injuries.push_back(injury);
       } 
 
-      Serial.println(name);
       BodyPartOption new_body_part;
 
       new_body_part.name = name;
@@ -178,18 +195,18 @@ class DistressCall{
        
     vector<InjuryOption> result;
     
-    //File file = SD.open("/" +  filename);
+    File file = SD.open("/" +  filename);
 
   
     StaticJsonDocument<2048> doc;
    
-    //if(!file){
-    //  Serial.println("/" + filename + " file not found");
-    //  Serial.println(file);
-    //  return result;
-    //}
+    if(!file){
+      Serial.println("/" + filename + " file not found");
+      Serial.println(file);
+      return result;
+    }
 
-    DeserializationError error = deserializeJson(doc, pl); 
+    DeserializationError error = deserializeJson(doc, file); 
     if (error) {
         Serial.println(F("Failed to read file, using default configuration" + *error.c_str()));
         return result;
@@ -205,7 +222,7 @@ class DistressCall{
 
 
       InjuryOption new_injury;
-      Serial.println(name);
+
 
       new_injury.name = name;
       new_injury.id   = id;
@@ -215,13 +232,15 @@ class DistressCall{
       }
       
     }
-    Serial.println("halo");
 
-    //file.close();
+
+    file.close();
 
     return result;
 } 
-    
+    void choose_injury(InjuryOption injury){
+      this->injury = injury.id;
+    }
     
 
     

@@ -25,9 +25,6 @@ std::vector<DisplayOption> display_option;
 
 TFT_eSPI tft = TFT_eSPI();    
 
-
-
-
 void clear_options(){
   display_option.clear();  
   current_id = 0;
@@ -35,7 +32,7 @@ void clear_options(){
 }
 
 void intialize_screen(){
-  tft.getSPIinstance().begin();
+  tft.begin();
   tft.setRotation(2); // Landscape orientation, USB at bottom right
   tft.setSwapBytes(false);
   tft.setTextSize(FONTSIZE);
@@ -101,4 +98,9 @@ void previous_option(){
   
 
 
+}
+
+
+void succes_message(){
+  fill_screen(PRIMARY_COLOR);
 }
