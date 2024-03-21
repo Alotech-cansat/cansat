@@ -13,7 +13,7 @@ use crate::schema::distress_calls::dsl::*;
 use repository::idistresscallrepo::*;
 use data::{distress_call::DistressCall, cordiantes::Cordinates};
 
-const DATABASE_URL: &str = "C:/Users/Staś/Desktop/CANSAT/api/infrastructure/cansat.db";
+const DATABASE_URL: &str = "C:/Users/dskyb/cansat/API/infrastructure/cansat.db";
 
 
 pub struct Database{}

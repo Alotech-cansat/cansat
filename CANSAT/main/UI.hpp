@@ -23,10 +23,9 @@ void setup_UI(){
   digitalWrite(SDCARD_CS,HIGH);
   digitalWrite(TFT_CS,HIGH);
   delay(10);
+
   
-  delay(10000);
   
-  Serial.begin (115200);
   
   initializeSD();
   Serial.println("initiliazed Sd reader");

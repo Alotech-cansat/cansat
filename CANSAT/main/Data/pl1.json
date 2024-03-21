@@ -1,24 +1,30 @@
 {
-    "Warunki terenu?":[
+    "Terrain":{
+        "question":"Teren",
+        "answers":[
+            {
+                "id":1,
+                "name":"Niebezpieczny"
+            },
+            {
+                "id":2,
+                "name":"Bezpieczny"
+            }
+        ]
+    },
+    "traped":{
+        "question":"Uwieziony?",
+        "answers":[
         {
-            "id":1,
-            "name":"Niebezpieczny"
-        },
-        {
-            "id":2,
-            "name":"Bezpieczny"
-        }
-    ],
-    "Czy jestes uwieziony?":[
-        {
-            "id":1,
-            "name":"Tak"
-        },
-        {
-            "id":2,
-            "name":"Nie"
-        }
-    ],
+                "id":1,
+                "name":"Tak"
+            },
+            {
+                "id":2,
+                "name":"Nie"
+            }
+        ]
+    },
     "Ludzie z toba?":[
         {
             "id":1,

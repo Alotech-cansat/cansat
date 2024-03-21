@@ -11,8 +11,9 @@ void doEncoder() {
 
 void setup_encoder(){
   pinMode(encoderPinA, INPUT_PULLUP); 
-  digitalWrite(encoderPinA, HIGH); 
+
   pinMode(encoderPinB, INPUT_PULLUP); 
-  digitalWrite(encoderPinB, HIGH);
+
   attachInterrupt(encoderPinA, doEncoder, RISING);
+  //attachInterrupt(encoderPinB, doEncoderB, RISING);
 }
