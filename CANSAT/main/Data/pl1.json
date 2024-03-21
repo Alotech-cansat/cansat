@@ -1,0 +1,72 @@
+{
+    "Warunki terenu?":[
+        {
+            "id":1,
+            "name":"Niebezpieczny"
+        },
+        {
+            "id":2,
+            "name":"Bezpieczny"
+        }
+    ],
+    "Czy jestes uwieziony?":[
+        {
+            "id":1,
+            "name":"Tak"
+        },
+        {
+            "id":2,
+            "name":"Nie"
+        }
+    ],
+    "Ludzie z toba?":[
+        {
+            "id":1,
+            "name":"Nie"
+        },
+        {
+            "id":2,
+            "name":"1-2"
+        },
+        {
+            "id":3,
+            "name":"Ponad 2 osoby"
+        }
+    ],
+    "Masz zapasy?":[
+        {
+            "id":1,
+            "name":"Tak (przynajmniej woda)"
+        },
+        {
+            "id":2,
+            "name":"Nie"
+        }
+    ],
+    "Urazy?":[
+        {
+            "id":1,
+            "name":"Uraz glowy"
+        },
+        {
+            "id":2,
+            "name":"Problem z oddychaniem"
+        },
+        {
+            "id":3,
+            "name":"Ciezkie krwawienie"
+        },
+        {
+            "id":4,
+            "name":"Oparzenia"
+        },
+        {
+            "id":5,
+            "name":"Zlamane kosci"
+        },
+        {
+            "id":6,
+            "name":"Uraz kregoslupa"
+        }
+    ]
+}

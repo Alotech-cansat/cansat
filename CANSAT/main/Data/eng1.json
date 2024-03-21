@@ -1,0 +1,72 @@
+{
+    "Terrain?":[
+        {
+            "id":1,
+            "name":"Dangerous"
+        },
+        {
+            "id":2,
+            "name":"Safe"
+        }
+    ],
+    "Are you trapped?":[
+        {
+            "id":1,
+            "name":"Yes"
+        },
+        {
+            "id":2,
+            "name":"No"
+        }
+    ],
+    "People with you?":[
+        {
+            "id":1,
+            "name":"No"
+        },
+        {
+            "id":2,
+            "name":"1-2"
+        },
+        {
+            "id":3,
+            "name":"More than 2"
+        }
+    ],
+    "Supplies?":[
+        {
+            "id":1,
+            "name":"Yes (at least water)"
+        },
+        {
+            "id":2,
+            "name":"No"
+        }
+    ],
+    "Injuries?":[
+        {
+            "id":1,
+            "name":"Head trauma"
+        },
+        {
+            "id":2,
+            "name":"Difficulty breathing"
+        },
+        {
+            "id":3,
+            "name":"Severe bleeding"
+        },
+        {
+            "id":4,
+            "name":"Severe burns"
+        },
+        {
+            "id":5,
+            "name":"Broken bones"
+        },
+        {
+            "id":6,
+            "name":"Spinal injury"
+        }
+    ]
+}
