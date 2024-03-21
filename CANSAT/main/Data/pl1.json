@@ -1,6 +1,6 @@
 {
     "terrain":{
-        "question":"Teren",
+        "question":"Warunki terenu?",
         "answers":[
             {
                 "id":1,
