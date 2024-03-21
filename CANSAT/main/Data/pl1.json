@@ -1,5 +1,5 @@
 {
-    "Terrain":{
+    "terrain":{
         "question":"Teren",
         "answers":[
             {
@@ -12,7 +12,7 @@
             }
         ]
     },
-    "traped":{
+    "trapped":{
         "question":"Uwieziony?",
         "answers":[
         {
@@ -25,34 +25,42 @@
             }
         ]
     },
-    "Ludzie z toba?":[
+    "people":{
+        "question":"Ludzie z toba?",
+        "answers":[
+            {
+                "id":1,
+                "name":"Nie"
+            },
+            {
+                "id":2,
+                "name":"1-3"
+            },
+            {
+                "id":3,
+                "name":"ponad 3 osoby"
+            }
+        ]
+    },
+    "supplies":{
+        "question":"Masz zapasy?",
+        "answers":[
+            {
+                "id":1,
+                "name":"Tak (przynajmniej woda)"
+            },
+            {
+                "id":2,
+                "name":"Nie"
+            }
+        ]
+    },
+    "injuries?":{
+        "question":"Urazy?",
+        "answers":[
         {
             "id":1,
-            "name":"Nie"
-        },
-        {
-            "id":2,
-            "name":"1-2"
-        },
-        {
-            "id":3,
-            "name":"Ponad 2 osoby"
-        }
-    ],
-    "Masz zapasy?":[
-        {
-            "id":1,
-            "name":"Tak (przynajmniej woda)"
-        },
-        {
-            "id":2,
-            "name":"Nie"
-        }
-    ],
-    "Urazy?":[
-        {
-            "id":1,
-            "name":"Uraz glowy"
+            "name":"Urazy glowy"
         },
         {
             "id":2,
@@ -64,7 +72,7 @@
         },
         {
             "id":4,
-            "name":"Oparzenia"
+            "name":"Ciezkie oparzenia"
         },
         {
             "id":5,
