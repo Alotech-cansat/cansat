@@ -1,5 +1,6 @@
 #include "UI.hpp"
 
+int last_sensor_update;
 
 void setup(){
 
@@ -15,7 +16,7 @@ void setup(){
   clear_file("data.txt");
   
 
-
+  last_sensor_update = millis();
   
   
 }
@@ -23,8 +24,16 @@ void setup(){
 
 
 void loop(){
-  
+
   loop_ui();
-  loop_sensors();
+  
+  
+  if (millis() - last_sensor_update > 500){
+    
+    loop_sensors();
+    last_sensor_update = millis();
+  }
+
+  
 
 }

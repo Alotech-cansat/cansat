@@ -63,8 +63,8 @@ struct Measurment{
 
 String showTimeOfMeasurements(int x)
 {
-  int seconds = x % 60;
-  int minutes = x / 60;
+  int seconds = x % 1000;
+  int minutes = x / 1000;
   String output = String(minutes) + ":" + String(seconds);
   return output;
 }
@@ -76,7 +76,7 @@ Measurment printValuesBMEADXL()
   sensors_event_t event; 
   accel.getEvent(&event);
   //Serial.println(showTimeOfMeasurements(count));
-  count_time = count_time + 1;
+  count_time = millis();
   /* Display the results (acceleration is measured in m/s^2) */
 
   Measurment measurment;
@@ -92,7 +92,7 @@ Measurment printValuesBMEADXL()
 
   write_to_file(data_filename, "ACCELERATION (x,y,z) (m/s^2): (" + String(measurment.acx) + "," + String(measurment.acy) + "," + String(measurment.acz) + ") \t TEMPERATURE (C): " + String(measurment.temp) + " \t ALTITUDE: " + String(measurment.altitude) + " \t PRESSURE: " + String(measurment.pressure) + " \t HUMIDITY: " + String(measurment.humidity));
 
-  delay(delayTime);
+
   return measurment;
   
 }
@@ -151,28 +151,7 @@ void loop_sensors() {
 
   Measurment data = printValuesBMEADXL();
 
-  Serial.print("Time: "); Serial.print(data.time); Serial.print("  ");
-  Serial.print("\nX: "); Serial.print(data.acx); Serial.print("  ");
-  Serial.print("Y: "); Serial.print(data.acy); Serial.print("  ");
-  Serial.print("Z: "); Serial.print(data.acz); Serial.print("  ");Serial.println("m/s^2 ");
-  
-  Serial.print("Temperature = ");
-  Serial.print(data.temp);
-  Serial.println(" °C");
 
-  Serial.print("Pressure = ");
-
-  Serial.print(data.pressure);
-  Serial.println(" hPa");
-
-  Serial.print("Approx. Altitude = ");
-  Serial.print(data.altitude);
-  Serial.println(" m");
-
-  Serial.print("Humidity = ");
-  Serial.print(data.humidity);
-  Serial.println(" %");
 
 
 }
-

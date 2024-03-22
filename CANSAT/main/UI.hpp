@@ -16,6 +16,7 @@ vector<InjuryOption> Injuries;
 bool IsChoosingLanguage = true;
 bool IsChoosingBodyPart = false;
 bool IsChoosingInjury = false;
+bool IsSuccess = false;
 
 void setup_UI(){
   tft.begin();
@@ -119,8 +120,12 @@ void loop_ui(){
     succes_message();
     delay(500);
 
-    while(!update_button_click()){};
-    clear_ui();
+    IsSuccess = true;
+
+  }else if(click && IsSuccess){
+        clear_ui();
+        IsSuccess = false;
+        IsChoosingBodyPart = true;
   }
 
 
