@@ -2,6 +2,7 @@
 #include "Display.hpp"
 #include "Encoder.hpp"
 #include "button.hpp"
+//#include "GPS.hpp"
 
 
 bool click = false;
@@ -73,6 +74,7 @@ void clear_ui(){
 
 void loop_ui(){
   
+  
   if(click && IsChoosingLanguage){
     Serial.println("choosing lang");
     
@@ -115,6 +117,8 @@ void loop_ui(){
     IsChoosingInjury = false;
 
     //TODO: kari napisz funkcje
+    Location loc = get_gps();
+
     mycall.secret_key = mycall.get_code();//Send(mycall.get_code())
 
     succes_message();

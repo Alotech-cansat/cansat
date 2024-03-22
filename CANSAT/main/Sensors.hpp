@@ -26,6 +26,7 @@
 #include <Arduino.h>
 #include <vector>
 #include "SDCARD.hpp"
+#include "GPS.hpp"
 
 
 using namespace std; 
@@ -49,13 +50,18 @@ int count_time;
 
 struct Measurment{
   int time;
+  
   float acx;
   float acy;
   float acz;
+  
   int temp;
   int pressure;
   int humidity;
-  int altitude;
+  
+  float altitude;
+  float longitude;
+  float latitude;
 
 };
 
@@ -90,7 +96,14 @@ Measurment printValuesBMEADXL()
   measurment.altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
   measurment.humidity = bme.readHumidity();
 
-  write_to_file(data_filename, "ACCELERATION (x,y,z) (m/s^2): (" + String(measurment.acx) + "," + String(measurment.acy) + "," + String(measurment.acz) + ") \t TEMPERATURE (C): " + String(measurment.temp) + " \t ALTITUDE: " + String(measurment.altitude) + " \t PRESSURE: " + String(measurment.pressure) + " \t HUMIDITY: " + String(measurment.humidity));
+  Location loc = get_gps();
+
+  measurment.latitude = loc.latitude;
+  measurment.longitude = loc.longitude;
+  measurment.altitude = loc.altitude;
+
+  
+  write_to_file(data_filename, "ACCELERATION (x,y,z) (m/s^2): (" + String(measurment.acx) + "," + String(measurment.acy) + "," + String(measurment.acz) + ") \t TEMPERATURE (C): " + String(measurment.temp) + " \t ALTITUDE: " + String(measurment.altitude) + " \t PRESSURE: " + String(measurment.pressure) + " \t HUMIDITY: " + String(measurment.humidity) + "\t LOCATION (longitude, latitude): (" + measurment.longitude + "," + measurment.latitude + ")");
 
 
   return measurment;

@@ -9,6 +9,7 @@ void setup(){
 
   Serial.begin (115200);
 
+  setup_gps();
   initializeSD();
   setup_UI();
   setupBMEADXL();
@@ -24,7 +25,7 @@ void setup(){
 
 
 void loop(){
-
+  
   loop_ui();
   
   
