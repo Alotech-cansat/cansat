@@ -26,8 +26,13 @@ void initializeSD(){
   
 }  
 
-void create_file(String filename){
-
+void clear_file(String filename){
+  File file = SD.open("/" + filename, FILE_WRITE);
+  if(!file){
+      Serial.println("file not found");
+      
+  }
+  file.close();
 }
 
 File get_file(String filename){
