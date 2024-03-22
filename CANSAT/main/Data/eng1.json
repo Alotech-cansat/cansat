@@ -1,49 +1,63 @@
 {
-    "Terrain?":[
+    "terrain":{
+        "question":"Terrain?",
+        "answers":[
+            {
+                "id":1,
+                "name":"Dangerous"
+            },
+            {
+                "id":2,
+                "name":"Safe"
+            }
+        ]
+    },
+    "trapped":{
+        "question":"Are you trapped?",
+        "answers":[
         {
-            "id":1,
-            "name":"Dangerous"
-        },
-        {
-            "id":2,
-            "name":"Safe"
-        }
-    ],
-    "Are you trapped?":[
-        {
-            "id":1,
-            "name":"Yes"
-        },
-        {
-            "id":2,
-            "name":"No"
-        }
-    ],
-    "People with you?":[
-        {
-            "id":1,
-            "name":"No"
-        },
-        {
-            "id":2,
-            "name":"1-2"
-        },
-        {
-            "id":3,
-            "name":"More than 2"
-        }
-    ],
-    "Supplies?":[
-        {
-            "id":1,
-            "name":"Yes (at least water)"
-        },
-        {
-            "id":2,
-            "name":"No"
-        }
-    ],
-    "Injuries?":[
+                "id":1,
+                "name":"Yes"
+            },
+            {
+                "id":2,
+                "name":"No"
+            }
+        ]
+    },
+    "people":{
+        "question":"People with you?",
+        "answers":[
+            {
+                "id":1,
+                "name":"No"
+            },
+            {
+                "id":2,
+                "name":"1-3"
+            },
+            {
+                "id":3,
+                "name":"ponad 3 osoby"
+            }
+        ]
+    },
+    "supplies":{
+        "question":"Supplies?",
+        "answers":[
+            {
+                "id":1,
+                "name":"Yes (at least water)"
+            },
+            {
+                "id":2,
+                "name":"No"
+            }
+        ]
+    },
+    "injuries?":{
+        "question":"Injuries?",
+        "answers":[
         {
             "id":1,
             "name":"Head trauma"
