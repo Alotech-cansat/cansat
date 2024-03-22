@@ -33,7 +33,9 @@ void clear_options(){
 
 void intialize_screen(){
   tft.begin();
+  Serial.println("Initialized tft");
   tft.setRotation(2); // Landscape orientation, USB at bottom right
+  Serial.println("Set rotation");
   tft.setSwapBytes(false);
   tft.setTextSize(FONTSIZE);
   tft.setTextColor(SECONDARY_COLOR);

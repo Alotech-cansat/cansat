@@ -24,24 +24,23 @@ void setup_UI(){
   digitalWrite(TFT_CS,HIGH);
   delay(10);
 
-  
-  
-  
-  initializeSD();
-  Serial.println("initiliazed Sd reader");
 
   setup_encoder();
   Serial.println("Initialized encoder");
 
   setup_click();
   
-  langs = mycall.get_langs(SD);
+  
 
   Serial.println("Read language file");
   
   intialize_screen();
   fill_screen();
   Serial.println("Initialized screen");
+  
+
+  langs = mycall.get_langs(SD);
+  Serial.println(langs[0].name);
 
   for(LangOption& i :langs){
     Serial.print(i.name);
@@ -55,6 +54,7 @@ void setup_UI(){
   Serial.println(current_id);
 
   Serial.println("Setup finished");
+ 
 }
 
 void clear_ui(){
@@ -113,30 +113,18 @@ void loop_ui(){
 
     IsChoosingInjury = false;
 
-
     //TODO: kari napisz funkcje
-    mycall.secret_key = "null";//Send(mycall.get_code())
+    mycall.secret_key = mycall.get_code();//Send(mycall.get_code())
 
     succes_message();
     delay(500);
 
-    while(!update_button_click()){
-
-    };
+    while(!update_button_click()){};
     clear_ui();
   }
 
 
   click = update_button_click(); 
-/*  
-  if (prev_button_state == false && click){
-    
-    NextUiLevel = true;
-  }else{
-    NextUiLevel = false;
-  }
 
-  prev_button_state = click;
-*/
  
 }

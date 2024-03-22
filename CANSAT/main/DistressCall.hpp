@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 #include <fstream>
 #include <vector>
-#include "SD.hpp"
+#include "Sensors.hpp"
 
 const String languages_filename= "/lang.json";
 
@@ -51,7 +51,7 @@ class DistressCall{
     vector<LangOption> get_langs(fs::FS &fs){
       vector<LangOption> result;
       
-      File lang_file = fs.open( languages_filename);
+      File lang_file = fs.open(languages_filename);
 
       StaticJsonDocument<1024> doc;
 

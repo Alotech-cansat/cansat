@@ -2,7 +2,7 @@
 #define encoderPinB  3
 
 void doEncoder() {
-  if (digitalRead(encoderPinB)==HIGH) {
+  if (digitalRead(encoderPinA)==HIGH) {
     next_option();
   } else {
     previous_option();

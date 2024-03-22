@@ -8,7 +8,6 @@
 #define SDCARD_SCLK 14
 #define SDCARD_MISO 9
 
-const String data_filename = "/data.txt";
 
 SPIClass SDSPI(FSPI);
 
@@ -27,10 +26,13 @@ void initializeSD(){
   
 }  
 
+void create_file(String filename){
 
-File get_file(fs::FS &fs, String filename){
+}
 
-    File file = fs.open( filename);
+File get_file(String filename){
+
+    File file = SD.open( filename);
 
     if(!file){
       Serial.println("file not found");
@@ -39,8 +41,18 @@ File get_file(fs::FS &fs, String filename){
 
     return file;
 }
-/*
-void write_to_file(fs::Fs &fs, String filename, String content){
 
-}*/
+int write_to_file(String filename, String content){
+  File file = SD.open("/" + filename, FILE_APPEND );
+
+  if(file){
+    file.println(content);
+    file.close();
+    Serial.println("succesfully saved");
+    return 1;
+  }else{
+    Serial.println("error opening file");
+    return 0;
+  }
+}
 
