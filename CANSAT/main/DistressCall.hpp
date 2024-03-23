@@ -35,7 +35,8 @@ struct InjuryOption{
 class DistressCall{
   public:
 
-    int secret_key;
+    int secret_key = 0;
+    int code;
     DistressCall(){}
 
     int get_code(){
@@ -226,6 +227,8 @@ class DistressCall{
     int body_part;
     int injury;
     int pain_level;
+
+    
 
     int current_level = 0;
 };

@@ -124,9 +124,13 @@ void loop_ui(){
     //TODO: kari napisz funkcje
     Location loc = get_gps();
 
-    mycall.secret_key = mycall.get_code();//Send(mycall.get_code())
+    mycall.code = mycall.get_code();//Send(mycall.get_code())
 
-    send_message(String(loc.longitude) + " " + String(loc.latitude)  + " " + String(mycall.secret_key));
+    if(!mycall.secret_key){
+      send_message("D" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code));
+    }else{
+      send_message("U" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code) + " " + String(mycall.secret_key));
+    }
     succes_message();
     delay(500);
 
