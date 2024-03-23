@@ -53,7 +53,7 @@ int write_to_file(String filename, String content){
   if(file){
     file.println(content);
     file.close();
-    Serial.println("succesfully saved");
+    //Serial.println("succesfully saved");
     return 1;
   }else{
     Serial.println("error opening file");

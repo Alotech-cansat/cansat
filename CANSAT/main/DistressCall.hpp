@@ -35,7 +35,7 @@ struct InjuryOption{
 class DistressCall{
   public:
 
-    string secret_key;
+    int secret_key;
     DistressCall(){}
 
     int get_code(){

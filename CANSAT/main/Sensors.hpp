@@ -76,7 +76,7 @@ String showTimeOfMeasurements(int x)
 }
 
 
-Measurment printValuesBMEADXL()
+String printValuesBMEADXL()
 {
   /* Get a new sensor event */ 
   sensors_event_t event; 
@@ -97,16 +97,16 @@ Measurment printValuesBMEADXL()
   measurment.humidity = bme.readHumidity();
 
   Location loc = get_gps();
+  Serial.println(String(loc.latitude) + " " + String(loc.longitude));
 
   measurment.latitude = loc.latitude;
   measurment.longitude = loc.longitude;
-  measurment.altitude = loc.altitude;
+  //measurment.altitude = loc.altitude;
 
-  
-  write_to_file(data_filename, "ACCELERATION (x,y,z) (m/s^2): (" + String(measurment.acx) + "," + String(measurment.acy) + "," + String(measurment.acz) + ") \t TEMPERATURE (C): " + String(measurment.temp) + " \t ALTITUDE: " + String(measurment.altitude) + " \t PRESSURE: " + String(measurment.pressure) + " \t HUMIDITY: " + String(measurment.humidity) + "\t LOCATION (longitude, latitude): (" + measurment.longitude + "," + measurment.latitude + ")");
+  String msg = "ACCELERATION (x,y,z) (m/s^2): (" + String(measurment.acx) + "," + String(measurment.acy) + "," + String(measurment.acz) + ") \t TEMPERATURE (C): " + String(measurment.temp) + " \t ALTITUDE: " + String(measurment.altitude) + " \t PRESSURE: " + String(measurment.pressure) + " \t HUMIDITY: " + String(measurment.humidity) + "\t LOCATION (longitude, latitude): (" + measurment.longitude + "," + measurment.latitude + ")";
+  write_to_file(data_filename, msg);
 
-
-  return measurment;
+  return msg;
   
 }
 
@@ -159,10 +159,10 @@ void displaySensorDetails(void)
 }
 
 
-void loop_sensors() {
+String loop_sensors() {
   
 
-  Measurment data = printValuesBMEADXL();
+  return printValuesBMEADXL();
 
 
 

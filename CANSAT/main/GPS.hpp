@@ -14,7 +14,7 @@ void setup_gps() {
 
     Serial1.begin(9600, SERIAL_8N1, GPS_TX_PIN, GPS_RX_PIN);
 
-    //while (!Serial1){}
+    
     Serial.println("GPS start");
 }
 

@@ -2,7 +2,9 @@
 #include "Display.hpp"
 #include "Encoder.hpp"
 #include "button.hpp"
-//#include "GPS.hpp"
+#include "radio.hpp"
+#include <string>
+#include <iostream>
 
 
 bool click = false;
@@ -19,8 +21,10 @@ bool IsChoosingBodyPart = false;
 bool IsChoosingInjury = false;
 bool IsSuccess = false;
 
+using namespace std;
+
 void setup_UI(){
-  tft.begin();
+  
 
   digitalWrite(SDCARD_CS,HIGH);
   digitalWrite(TFT_CS,HIGH);
@@ -35,7 +39,7 @@ void setup_UI(){
   
 
   Serial.println("Read language file");
-  
+  tft.begin();
   intialize_screen();
   fill_screen();
   Serial.println("Initialized screen");
@@ -60,6 +64,7 @@ void setup_UI(){
 }
 
 void clear_ui(){
+
   IsChoosingBodyPart = true;
       clear_options();
     
@@ -121,6 +126,7 @@ void loop_ui(){
 
     mycall.secret_key = mycall.get_code();//Send(mycall.get_code())
 
+    send_message(String(loc.longitude) + " " + String(loc.latitude)  + " " + String(mycall.secret_key));
     succes_message();
     delay(500);
 
