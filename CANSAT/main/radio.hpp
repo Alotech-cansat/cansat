@@ -50,8 +50,7 @@ void LoRa_setup(){
     while (1);
   }
   
-  LoRa.onReceive(onReceive);
-  LoRa.receive();
+
     pinMode(dio0, INPUT);
 
   Serial.println("intialized");
@@ -63,7 +62,8 @@ void send_message(String msg){
   Serial.println(msg);
   LoRa.beginPacket();
   LoRa.print(msg);
-  LoRa.endPacket();
+  LoRa.endPacket(true);
+  LoRa.onReceive(onReceive);
   LoRa.receive();
 }
 
