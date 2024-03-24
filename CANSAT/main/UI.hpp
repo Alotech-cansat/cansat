@@ -126,7 +126,7 @@ void loop_ui(){
 
     mycall.code = mycall.get_code();//Send(mycall.get_code())
 
-    if(!mycall.secret_key){
+    if(1/*mycall.secret_key == ""*/){
       send_message("D" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code));
     }else{
       send_message("U" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code) + " " + String(mycall.secret_key));
@@ -142,6 +142,7 @@ void loop_ui(){
         IsChoosingBodyPart = true;
   }
 
+  mycall.secret_key = received_secret_key;
 
   click = update_button_click(); 
 

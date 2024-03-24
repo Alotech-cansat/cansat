@@ -18,11 +18,24 @@
 #define SCK 34
 #define MISO 1
 
+String received_secret_key = "";
 
 SPIClass LoRaSPI(FSPI);
 
-void onReceive(int packetsize){
-  Serial.println("aloha");
+void onReceive(int packetSize){
+  //Serial.println("received using interupt");
+  
+  //Serial.println(packetSize);
+  if (packetSize) {
+    // received a packet
+    
+
+    // read packet
+    while (LoRa.available()) {
+      String LoRaData = LoRa.readString();
+      received_secret_key = LoRaData;
+    }
+  }
 }
 
 void LoRa_setup(){
