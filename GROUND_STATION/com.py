@@ -11,3 +11,7 @@ except:
 
 def readline() -> str:
     return board.readline()
+
+
+def write_serial(msg : str):
+    board.wrtie(bytes(msg, "utf-8")) 

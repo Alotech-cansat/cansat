@@ -63,6 +63,8 @@ void setup() {
   // The sync word assures you don't get LoRa messages from other LoRa transceivers
   // ranges from 0-0xFF
   LoRa_setup();
+  Serial.setTimeout(100);
+
 }
 
 
@@ -71,6 +73,7 @@ void send_message(String msg){
   LoRa.beginPacket();
   LoRa.print(msg);
   LoRa.endPacket(true);
+
 }
 
 void loop() {
@@ -86,6 +89,11 @@ void loop() {
       Serial.println(LoRaData); 
     }
 
+    String x = Serial.readString();
+
+    if(x.length() > 0){
+      send_message(x);
+    }
     // print RSSI of packet
 
   send_message(Serial.readString());

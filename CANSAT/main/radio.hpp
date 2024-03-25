@@ -64,6 +64,20 @@ void LoRa_setup() {
   Serial.println("LoRa Initializing OK!");
 }
 
+void onReceive(int packetSize){
+
+  if (packetSize) {
+    // received a packet
+ 
+
+    // read packet
+    while (LoRa.available()) {
+      received_secret_key = LoRa.readString();
+      
+    }
+  }
+}
+
 void send_message(String msg) {
   Serial.print("Sending packet: ");
   Serial.println(msg);
@@ -72,6 +86,9 @@ void send_message(String msg) {
   LoRa.beginPacket();
   LoRa.print(msg);
   LoRa.endPacket();
+
+  LoRa.receive(onReceive);
+  LoRa.receive();
 
 
 }

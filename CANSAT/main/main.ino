@@ -47,7 +47,7 @@ if (res != ""){
   if (millis() - last_sensor_update > 500){
     
    sensor_msg = loop_sensors();
-   // send_message(sensor_msg);
+   send_message(sensor_msg);
     last_sensor_update = millis();
   }
 

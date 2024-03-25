@@ -97,7 +97,6 @@ String printValuesBMEADXL()
   measurment.humidity = bme.readHumidity();
 
   Location loc = get_gps();
-  Serial.println(String(loc.latitude) + " " + String(loc.longitude));
 
   measurment.latitude = loc.latitude;
   measurment.longitude = loc.longitude;

@@ -17,6 +17,7 @@ class GroundStation:
 
                 if msg[0] == "D":
                     self.distress_calls.append(DistressCall.from_new_distress_call(msg))
+                    write_serial(self.distress_calls[-1].secret_key)
                     print("New upcoming distress Call")
                 elif msg[0] == "U":
                     msg = msg[1:].split(" ")
@@ -34,9 +35,6 @@ class GroundStation:
                 else:
                     print(msg)
 
-
-
-                print(msg)
 
 
 station = GroundStation()
