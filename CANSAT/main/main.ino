@@ -49,7 +49,6 @@ void loop(){
     last_sensor_update = millis();
   }
 
-  //send_message("aloha");
   
 
 }

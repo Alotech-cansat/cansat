@@ -35,5 +35,7 @@ class GroundStation:
                 print(msg)
 
 
-readline()
+station = GroundStation()
+
+station.run()
 
