@@ -100,8 +100,13 @@ void loop() {
     while (LoRa.available()) {
       String LoRaData = LoRa.readString();
       Serial.print(LoRaData); 
+      
     }
-
+    delay(10);
 
   }
+
+  send_message(Serial.readString());
+
+
 }
