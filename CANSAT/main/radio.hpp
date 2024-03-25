@@ -87,7 +87,7 @@ void send_message(String msg) {
   LoRa.print(msg);
   LoRa.endPacket();
 
-  LoRa.receive(onReceive);
+  LoRa.onReceive(onReceive);
   LoRa.receive();
 
 
