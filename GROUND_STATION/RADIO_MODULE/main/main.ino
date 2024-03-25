@@ -32,7 +32,7 @@ void LoRa_setup(){
 
   LoRa.enableCrc();
   pinMode(ss, OUTPUT);
-  pinMode(dio0, INPUT); // added
+ // pinMode(dio0, INPUT); // added
   LoRa.setPins(ss, rst, dio0);
 
   LoRaSPI.begin(SCK, MISO, MOSI, ss);
@@ -44,9 +44,9 @@ void LoRa_setup(){
     while (1);
   }
   
-  LoRa.onReceive(onReceive);
-  LoRa.receive();
-    pinMode(dio0, INPUT);
+  //LoRa.onReceive(onReceive);
+  //LoRa.receive();
+ //   pinMode(dio0, INPUT);
 
   Serial.println("intialized");
 }
@@ -65,48 +65,30 @@ void setup() {
   LoRa_setup();
 }
 
-void onReceive(int packetSize){
-  //Serial.println("received using interupt");
-  
-  //Serial.println(packetSize);
-  if (packetSize) {
-    // received a packet
-    
 
-    // read packet
-    while (LoRa.available()) {
-      String LoRaData = LoRa.readString();
-      Serial.print(LoRaData); 
-    }
-  }
-}
 
 void send_message(String msg){
   LoRa.beginPacket();
   LoRa.print(msg);
-  LoRa.endPacket();
+  LoRa.endPacket(true);
 }
 
 void loop() {
-
   // try to parse packet
   int packetSize = LoRa.parsePacket();
-  //Serial.println(packetSize);
   if (packetSize) {
     // received a packet
-    
+ 
 
     // read packet
     while (LoRa.available()) {
       String LoRaData = LoRa.readString();
-      Serial.print(LoRaData); 
-      
+      Serial.println(LoRaData); 
     }
-    delay(10);
 
-  }
+    // print RSSI of packet
 
   send_message(Serial.readString());
 
-
+  }
 }

@@ -14,31 +14,22 @@
 #define SPREADING_FACTOR 7
 #define BANDWITH 125E3
 
-#define MOSI 17
+#define MOSI 21
 #define SCK 34
 #define MISO 1
 
-String received_secret_key = "";
+String received_secret_key;
+SPIClass LoRaSPI(HSPI);
+int counter = 0;
 
-SPIClass LoRaSPI(FSPI);
+void LoRa_setup() {
+  //initialize Serial Monitor
+  Serial.begin(115200);
+  while (!Serial);
+  Serial.println("LoRa Sender");
 
-void onReceive(int packetSize){
-  //Serial.println("received using interupt");
-  
-  //Serial.println(packetSize);
-  if (packetSize) {
-    // received a packet
-    
+  //setup LoRa transceiver module
 
-    // read packet
-    while (LoRa.available()) {
-      String LoRaData = LoRa.readString();
-      received_secret_key = LoRaData;
-    }
-  }
-}
-
-void LoRa_setup(){
   LoRa.setTxPower(TX_POWER);
   LoRa.setSyncWord(SYNC_WORD);
   LoRa.setCodingRate4(CODING_RATE);
@@ -51,33 +42,36 @@ void LoRa_setup(){
 
   LoRa.enableCrc();
   pinMode(ss, OUTPUT);
-  pinMode(dio0, INPUT); // added
+ // pinMode(dio0, INPUT); // added
   LoRa.setPins(ss, rst, dio0);
 
   LoRaSPI.begin(SCK, MISO, MOSI, ss);
 
   LoRa.setSPI(LoRaSPI);
 
-  if (!LoRa.begin(433E6)) {
-    Serial.println("Starting LoRa failed!");
-    while (1);
+  //replace the LoRa.begin(---E-) argument with your location's frequency 
+  //433E6 for Asia
+  //866E6 for Europe
+  //915E6 for North America
+  while (!LoRa.begin(433E6)) {
+    Serial.println(".");
+    delay(500);
   }
-  
-
-    pinMode(dio0, INPUT);
-
-  Serial.println("intialized");
+   // Change sync word (0xF3) to match the receiver
+  // The sync word assures you don't get LoRa messages from other LoRa transceivers
+  // ranges from 0-0xFF
+  LoRa.setSyncWord(0xF3);
+  Serial.println("LoRa Initializing OK!");
 }
 
-
-
-void send_message(String msg){
+void send_message(String msg) {
+  Serial.print("Sending packet: ");
   Serial.println(msg);
+
+  //Send LoRa packet to receiver
   LoRa.beginPacket();
   LoRa.print(msg);
-  LoRa.endPacket(true);
-  LoRa.onReceive(onReceive);
-  LoRa.receive();
+  LoRa.endPacket();
+
+
 }
-
-

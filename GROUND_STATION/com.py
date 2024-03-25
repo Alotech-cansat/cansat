@@ -1,6 +1,6 @@
 import serial
 
-BOARD_COM = "COM13"
+BOARD_COM = "COM4"
 
 try:
     board = serial.Serial(port = BOARD_COM, baudrate=115200, timeout = 1)

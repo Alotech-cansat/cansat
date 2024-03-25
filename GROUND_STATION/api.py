@@ -43,7 +43,7 @@ class DistressCall:
 
         data = msg[1:].split(" ")
         
-        latitude, longitude, code = data[0], data[1], data[2]
+        latitude, longitude, code = data[1], data[2], data[3]
 
         obj.call_cordinates = Cordinates(float(latitude), float(longitude))
         obj.details = code

@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 
+String distress_call_message;
 
 bool click = false;
 bool NextUiLevel = false;
@@ -77,9 +78,9 @@ void clear_ui(){
 
 }
 
-void loop_ui(){
+String loop_ui(){
   
-  
+  distress_call_message = "";
   if(click && IsChoosingLanguage){
     Serial.println("choosing lang");
     
@@ -126,16 +127,16 @@ void loop_ui(){
 
     mycall.code = mycall.get_code();//Send(mycall.get_code())
 
-    if(1/*mycall.secret_key == ""*/){
-      send_message("D" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code));
+    if(mycall.secret_key == ""){
+      distress_call_message = "D " + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code);
     }else{
-      send_message("U" + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code) + " " + String(mycall.secret_key));
+      distress_call_message = "U " + String(loc.latitude) + " " + String(loc.longitude)  + " " + String(mycall.code) + " " + String(mycall.secret_key);
     }
     succes_message();
     delay(500);
 
     IsSuccess = true;
-
+   
   }else if(click && IsSuccess){
         clear_ui();
         IsSuccess = false;
@@ -146,5 +147,5 @@ void loop_ui(){
 
   click = update_button_click(); 
 
- 
+  return distress_call_message;
 }
